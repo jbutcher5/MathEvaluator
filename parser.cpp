@@ -127,7 +127,7 @@ public:
 
       else if (isOperand && !isFunction && !isSymbol){
         if (stack.size() > 0){
-          if (operandPrecedence[stack.top()] < operandPrecedence[i]){
+          if (operandPrecedence[stack.top()] <= operandPrecedence[i]){
             for (int j = stack.size(); j > 0; j--){
               queue.push_back(stack.top());
               stack.pop();
@@ -205,7 +205,7 @@ private:
 
 int main(){
   MathsParser parser;
-  mp_SepValues x = parser.seperate("1+1");
+  mp_SepValues x = parser.seperate("3*4+435+5+43");
   mp_RPN r = parser.shunting_yard(x);
 
   LOG(r.RPN);
