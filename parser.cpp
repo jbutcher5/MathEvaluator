@@ -157,7 +157,7 @@ private:
       {"asin", asin}, {"acos", acos}, {"atan", atan}};
 
   std::map<std::string, int> operatorPrecedence = {
-      {"^", 0}, {"/", 1}, {"*", 2}, {"+", 3}, {"-", 4}};
+      {"^", 4}, {"*", 3}, {"/", 3}, {"+", 2}, {"-", 2}};
 
   std::map<std::string, float (*)(double, double)> operatorMap = {
       {"+", fadd}, {"-", fsub}, {"*", fmul}, {"/", fdiv}};
