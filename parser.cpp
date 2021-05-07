@@ -44,7 +44,7 @@ public:
 
       bool isSplit;
 
-      for (auto const &operand : operator) {
+      for (auto const &operand : operators) {
         if (item == operand){
           isOperand = true;
           break;
@@ -89,33 +89,9 @@ public:
     std::vector<std::string> queue;
 
     for (auto const& i : sep.values){
-      bool isOperator = false;
-      bool isFunction = false;
-      bool isSymbol = false;
-
-      bool hasPush = false;
-
-
-      for (auto const& symbol : symbols){
-        if (i == symbol){
-          isSymbol = true;
-          break;
-        }
-      }
-
-      for (auto const &operand : operator) {
-        if (i == operand){
-          isOperand = true;
-          break;
-        }
-      }
-
-      for (auto const& function : functions){
-        if (i == function){
-          isFunction = true;
-          break;
-        }
-      }
+      bool isOperator = inVector(i, operators);
+      bool isFunction = inVector(i, functions);
+      bool isSymbol = inVector(i, symbols);
 
       if (!isOperator && !isFunction && !isSymbol) {
         queue.push_back(i);
@@ -126,7 +102,20 @@ public:
       }
 
       else if (isOperator && !isFunction && !isSymbol) {
+        while(stack.size() > 0){
+          if(((inVector(stack.top(), operators) && stack.size() > 0) && (operatorPrecedence[stack.top()] > operatorPrecedence[i])) || ((operatorPrecedence[stack.top()] == operatorPrecedence[i]) && (operatorAssociative[stack.top()] == 0) && (stack.top() != "("))){
+            queue.push_back(stack.top());
+            stack.pop();
+          }
 
+          else{
+            break;
+          }
+
+
+        }
+
+      stack.push(i);
 
       }
     }
@@ -166,18 +155,33 @@ private:
       {"^", 1}, {"*", 0}, {"/", 0}, {"+", 0}, {"-", 0}};
 
   std::vector<std::string> functions;
-  std::vector<std::string> op;
+  std::vector<std::string> operators;
   std::vector<std::string> symbols = {"(", ")", ","};
 
   void populateArrays(){
     for (auto const &element : operatorMap) {
-      op.push_back(element.first);
+      operators.push_back(element.first);
     }
 
     for (auto const &element : functionsMap) {
       functions.push_back(element.first);
     }
+
   }
+
+  bool inVector(std::string item, std::vector<std::string> vector){
+    for (auto const& i : vector){
+
+      if (item == i){
+        return true;
+      }
+
+    }
+
+    return false;
+
+  }
+
 };
 
 int main(){
