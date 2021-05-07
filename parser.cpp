@@ -44,7 +44,7 @@ public:
 
       bool isSplit;
 
-      for (auto const& operand : operands){
+      for (auto const &operand : operator) {
         if (item == operand){
           isOperand = true;
           break;
@@ -89,7 +89,7 @@ public:
     std::vector<std::string> queue;
 
     for (auto const& i : sep.values){
-      bool isOperand = false;
+      bool isOperator = false;
       bool isFunction = false;
       bool isSymbol = false;
 
@@ -103,7 +103,7 @@ public:
         }
       }
 
-      for (auto const& operand : operands){
+      for (auto const &operand : operator) {
         if (i == operand){
           isOperand = true;
           break;
@@ -117,32 +117,18 @@ public:
         }
       }
 
-      if (!isOperand && !isFunction && !isSymbol){
+      if (!isOperator && !isFunction && !isSymbol) {
         queue.push_back(i);
       }
 
-      else if (!isOperand && isFunction && !isSymbol){
+      else if (!isOperator && isFunction && !isSymbol) {
         stack.push(i);
       }
 
-      else if (isOperand && !isFunction && !isSymbol){
-        if (stack.size() > 0){
-          if (operandPrecedence[stack.top()] <= operandPrecedence[i]){
-            for (int j = stack.size(); j > 0; j--){
-              queue.push_back(stack.top());
-              stack.pop();
-            }
+      else if (isOperator && !isFunction && !isSymbol) {
 
-            hasPush = true;
-            stack.push(i);
-          }
-        }
 
-        if (!hasPush){
-          stack.push(i);
-        }
       }
-
     }
 
     while (stack.size() > 0){
@@ -166,38 +152,29 @@ public:
   }
 
 private:
+  std::map<std::string, double (*)(double)> functionsMap = {
+      {"sin", sin},   {"cos", cos},   {"tan", tan},
+      {"asin", asin}, {"acos", acos}, {"atan", atan}};
 
+  std::map<std::string, int> operatorPrecedence = {
+      {"^", 0}, {"/", 1}, {"*", 2}, {"+", 3}, {"-", 4}};
 
+  std::map<std::string, float (*)(double, double)> operatorMap = {
+      {"+", fadd}, {"-", fsub}, {"*", fmul}, {"/", fdiv}};
 
-  std::map<std::string, double(*)(double)> functionsMap = {{"sin", sin},
-                                                           {"cos", cos},
-                                                           {"tan", tan},
-                                                           {"asin", asin},
-                                                           {"acos", acos},
-                                                           {"atan", atan}};
-
-  std::map<std::string, int> operandPrecedence = {{"^", 0},
-                                                  {"/", 1},
-                                                  {"*", 2},
-                                                  {"+", 3},
-                                                  {"-", 4}};
-
-  std::map<std::string, float(*)(double, double)> operandsMap = {{"+", fadd},
-                                                                  {"-", fsub},
-                                                                  {"*", fmul},
-                                                                  {"/", fdiv}};
-
+  std::map<std::string, int> operatorAssociative = {
+      {"^", 1}, {"*", 0}, {"/", 0}, {"+", 0}, {"-", 0}};
 
   std::vector<std::string> functions;
-  std::vector<std::string> operands;
+  std::vector<std::string> op;
   std::vector<std::string> symbols = {"(", ")", ","};
 
   void populateArrays(){
-    for (auto const& element : operandsMap){
-      operands.push_back(element.first);
+    for (auto const &element : operatorMap) {
+      op.push_back(element.first);
     }
 
-    for (auto const& element : functionsMap){
+    for (auto const &element : functionsMap) {
       functions.push_back(element.first);
     }
   }
@@ -205,7 +182,7 @@ private:
 
 int main(){
   MathsParser parser;
-  mp_SepValues x = parser.seperate("3*4+435+5+43");
+  mp_SepValues x = parser.seperate("67+456*654*634/3+2");
   mp_RPN r = parser.shunting_yard(x);
 
   LOG(r.RPN);
