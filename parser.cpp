@@ -20,6 +20,10 @@ struct mp_RPN : public mp_SepValues{
   std::string RPN;
 };
 
+float fpow(double x, double y){
+  return (float)pow(x, y);
+}
+
 class MathsParser{
 public:
   MathsParser(){
@@ -103,7 +107,7 @@ public:
 
       else if (isOperator && !isFunction && !isSymbol) {
         while(stack.size() > 0){
-          if(((inVector(stack.top(), operators) && stack.size() > 0) && (operatorPrecedence[stack.top()] > operatorPrecedence[i])) || ((operatorPrecedence[stack.top()] == operatorPrecedence[i]) && (operatorAssociative[stack.top()] == 0) && (stack.top() != "("))){
+          if(((inVector(stack.top(), operators)) && (operatorPrecedence[stack.top()] > operatorPrecedence[i])) || ((operatorPrecedence[stack.top()] == operatorPrecedence[i]) && (operatorAssociative[stack.top()] == 0) && (stack.top() != "("))){
             queue.push_back(stack.top());
             stack.pop();
           }
@@ -111,12 +115,32 @@ public:
           else{
             break;
           }
-
-
         }
 
       stack.push(i);
 
+      }
+
+      else if (i == "("){
+        stack.push(i);
+      }
+
+      else if (i == ")"){
+        while ((stack.top() != "(")){
+          queue.push_back(stack.top());
+          stack.pop();
+        }
+
+        if (stack.top() == "("){
+          stack.pop();
+        }
+
+        if (stack.size() > 0){
+          if (inVector(stack.top(), functions)){
+            queue.push_back(stack.top());
+            stack.pop();
+          }
+        }
       }
     }
 
@@ -149,7 +173,7 @@ private:
       {"^", 4}, {"*", 3}, {"/", 3}, {"+", 2}, {"-", 2}};
 
   std::map<std::string, float (*)(double, double)> operatorMap = {
-      {"+", fadd}, {"-", fsub}, {"*", fmul}, {"/", fdiv}};
+      {"^", fpow}, {"+", fadd}, {"-", fsub}, {"*", fmul}, {"/", fdiv}};
 
   std::map<std::string, int> operatorAssociative = {
       {"^", 1}, {"*", 0}, {"/", 0}, {"+", 0}, {"-", 0}};
@@ -159,14 +183,8 @@ private:
   std::vector<std::string> symbols = {"(", ")", ","};
 
   void populateArrays(){
-    for (auto const &element : operatorMap) {
-      operators.push_back(element.first);
-    }
-
-    for (auto const &element : functionsMap) {
-      functions.push_back(element.first);
-    }
-
+    for (auto const &element : operatorMap) operators.push_back(element.first);
+    for (auto const &element : functionsMap) functions.push_back(element.first);
   }
 
   bool inVector(std::string item, std::vector<std::string> vector){
@@ -186,7 +204,7 @@ private:
 
 int main(){
   MathsParser parser;
-  mp_SepValues x = parser.seperate("67+456*654*634/3+2");
+  mp_SepValues x = parser.seperate("3+4*2/(1-5)^2^3");
   mp_RPN r = parser.shunting_yard(x);
 
   LOG(r.RPN);
