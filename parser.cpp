@@ -43,24 +43,8 @@ public:
       ss << i;
       std::string item = ss.str();
 
-      bool isOperand = false;
-      bool isSymbol = false;
-
-      bool isSplit;
-
-      for (auto const &operand : operators) {
-        if (item == operand){
-          isOperand = true;
-          break;
-        }
-      }
-
-      for (auto const& symbol : symbols){
-        if (item == symbol){
-          isSymbol = true;
-          break;
-        }
-      }
+      bool isOperand = inVector(item, operators);
+      bool isSymbol = inVector(item, symbols);
 
       if (!isOperand && !isSymbol){
         store.push_back(item);
@@ -204,7 +188,7 @@ private:
 
 int main(){
   MathsParser parser;
-  mp_SepValues x = parser.seperate("3+4*2/(1-5)^2^3");
+  mp_SepValues x = parser.seperate("2*20/2+(3+4)*3^2-6+15");
   mp_RPN r = parser.shunting_yard(x);
 
   LOG(r.RPN);
