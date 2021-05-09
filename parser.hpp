@@ -1,11 +1,14 @@
 #pragma once
 
+#include <iostream>
 #include <cmath>
+#include <iterator>
 #include <map>
 #include <math.h>
 #include <sstream>
 #include <string>
 #include <sys/types.h>
+#include <type_traits>
 #include <vector>
 #include <algorithm>
 #include <stack>
@@ -30,6 +33,54 @@ public:
     populateArrays();
   }
 
+  mp_RPN reversePolishNotation(std::string infix){
+    return shunting_yard(seperate(infix));
+  }
+
+  double eval(mp_RPN RPN){
+
+    std::stack<double> resultStack;
+
+    for (std::string const& token : RPN.RPNValues){
+
+      bool isOperator = inVector(token, operators);
+      bool isFunction = inVector(token, functions);
+      bool isVariable = inVector(token, externalVariables);
+      bool isOperand = !isOperator && !isFunction && !isVariable;
+
+      if (isOperator){
+        std::string functionName = operatorTranslationTable[token];
+        int operands = functionParameters[functionName];
+
+        if (operands > (int)resultStack.size()) return 0.0;
+
+        double values[operands];
+
+        for (int i = 0; i < operands; i++){
+          values[i] = resultStack.top();
+          resultStack.pop();
+        }
+
+        resultStack.push(operatorMap[token](values[0], values[1]));
+
+      }
+      
+      else if (isOperand){
+        resultStack.push(std::stod(token));
+      }
+
+      else if (isVariable){
+        resultStack.push((double)externalVariablesMap[token]);
+      }
+
+    }
+
+    if ((int)resultStack.size() > 1 || (int)resultStack.size() < 1) return 0.0;
+
+    return resultStack.top();
+  }
+
+private:
   mp_SepValues seperate(std::string infix){
     remove(infix.begin(), infix.end(), ' ');
 
@@ -43,14 +94,14 @@ public:
       ss << i;
       std::string item = ss.str();
 
-      bool isOperand = inVector(item, operators);
+      bool isOperator = inVector(item, operators);
       bool isSymbol = inVector(item, symbols);
 
-      if (!isOperand && !isSymbol){
+      if (!isOperator && !isSymbol){
         store.push_back(item);
       }
 
-      if (isOperand || isSymbol){
+      if (isOperator || isSymbol){
         joiner = "";
         for (auto const& j : store) joiner += j;
         store.clear();
@@ -91,7 +142,9 @@ public:
 
       else if (isOperator && !isFunction && !isSymbol) {
         while(stack.size() > 0){
-          if(((inVector(stack.top(), operators)) && (operatorPrecedence[stack.top()] > operatorPrecedence[i])) || ((operatorPrecedence[stack.top()] == operatorPrecedence[i]) && (operatorAssociative[stack.top()] == 0) && (stack.top() != "("))){
+          if(((inVector(stack.top(), operators)) && (operatorPrecedence[stack.top()] > operatorPrecedence[i]))
+             || ((operatorPrecedence[stack.top()] == operatorPrecedence[i]) && (operatorAssociative[stack.top()] == 0) && (stack.top() != "("))){
+
             queue.push_back(stack.top());
             stack.pop();
           }
@@ -135,9 +188,7 @@ public:
 
     std::string joiner = "";
 
-    for (auto const& i : queue){
-      joiner += i;
-    }
+    for (auto const& i : queue) joiner += i;
 
     mp_RPN result;
     result.infix = sep.infix;
@@ -149,10 +200,20 @@ public:
 
   }
 
-private:
+  std::map<std::string, double> externalVariablesMap = {};
+
   std::map<std::string, double (*)(double)> functionsMap = {
       {"sin", sin},   {"cos", cos},   {"tan", tan},
       {"asin", asin}, {"acos", acos}, {"atan", atan}};
+
+  std::map<std::string, std::string> operatorTranslationTable = {
+      {"^", "pow"}, {"*", "mul"}, {"/", "div"}, {"+", "add"}, {"-", "sub"}};
+
+  std::map<std::string, int> functionParameters = {
+      {"sin", 1},   {"cos", 1},   {"tan", 1},
+      {"asin", 1}, {"acos", 1}, {"atan", 1},
+      {"pow", 2}, {"mul", 2}, {"div", 2},
+      {"add", 2}, {"sub", 2}};
 
   std::map<std::string, int> operatorPrecedence = {
       {"^", 4}, {"*", 3}, {"/", 3}, {"+", 2}, {"-", 2}};
@@ -163,6 +224,7 @@ private:
   std::map<std::string, int> operatorAssociative = {
       {"^", 1}, {"*", 0}, {"/", 0}, {"+", 0}, {"-", 0}};
 
+  std::vector<std::string> externalVariables;
   std::vector<std::string> functions;
   std::vector<std::string> operators;
   std::vector<std::string> symbols = {"(", ")", ","};
@@ -170,6 +232,7 @@ private:
   void populateArrays(){
     for (auto const &element : operatorMap) operators.push_back(element.first);
     for (auto const &element : functionsMap) functions.push_back(element.first);
+    for (auto const &element : externalVariablesMap) externalVariables.push_back(element.first);
   }
 
   bool inVector(std::string item, std::vector<std::string> vector){
