@@ -1,5 +1,6 @@
 #pragma once
 
+#include <array>
 #include <iostream>
 #include <cmath>
 #include <iterator>
@@ -12,6 +13,8 @@
 #include <vector>
 #include <algorithm>
 #include <stack>
+#include <utility>
+#include <tuple>
 
 struct mp_SepValues{
   std::vector<std::string> infixValues;
@@ -23,8 +26,12 @@ struct mp_RPN : public mp_SepValues{
   std::vector<std::string> RPNValues;
 };
 
-float fpow(double x, double y){
-  return (float)pow(x, y);
+float fpow(double x, double y) { return (float)pow(x, y); }
+
+inline double round(double val)
+{
+    if( val < 0 ) return ceil(val - 0.5);
+    return floor(val + 0.5);
 }
 
 class MathsParser{
@@ -54,15 +61,14 @@ public:
 
         if (operands > (int)resultStack.size()) return 0.0;
 
-        double values[operands];
+        std::array<double, 2> values;
 
         for (int i = 0; i < operands; i++){
           values[i] = resultStack.top();
           resultStack.pop();
         }
 
-        resultStack.push(operatorMap[token](values[0], values[1]));
-
+        resultStack.push((double)operatorMap[token](values[0], values[1]));
       }
       
       else if (isOperand){
@@ -73,11 +79,30 @@ public:
         resultStack.push((double)externalVariablesMap[token]);
       }
 
+      if (isFunction){
+        if (functionParameters[token] == 1){
+          double value = resultStack.top();
+          resultStack.pop();
+          functionsMap[token](value);
+        }
+
+        else if (functionParameters[token] == 2){
+          std::array<double, 2> values;
+
+          for (int i = 0; i < 2; i++){
+            values[i] = resultStack.top();
+            resultStack.pop();
+          }
+
+          multipleParameterFunction[token](values[0], values[1]);
+        }
+      }
+
     }
 
     if ((int)resultStack.size() > 1 || (int)resultStack.size() < 1) return 0.0;
 
-    return resultStack.top();
+    return round(resultStack.top() * 10000) / 10000;
   }
 
 private:
@@ -187,18 +212,24 @@ private:
     }
 
     std::string joiner = "";
+    std::vector<std::string> fixedQueue;
 
-    for (auto const& i : queue) joiner += i;
+    for (auto const& i : queue){
+      joiner += i;
+      if (i != "") fixedQueue.push_back(i);
+    }
 
     mp_RPN result;
     result.infix = sep.infix;
     result.infixValues = sep.infixValues;
-    result.RPNValues = queue;
+    result.RPNValues = fixedQueue;
     result.RPN = joiner;
 
     return result;
 
   }
+
+  std::map<std::string, double (*)(double, double)> multipleParameterFunction = {};
 
   std::map<std::string, double> externalVariablesMap = {};
 
