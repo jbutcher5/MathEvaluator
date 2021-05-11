@@ -51,6 +51,19 @@ bool eval(std::vector<std::string> input, std::vector<std::string> RPN, std::vec
       }
     }
 
+    double x = 10;
+
+    parser.addVariable("x", x);
+
+    mp_RPN pn = parser.reversePolishNotation("x");
+    LOG(parser.eval(pn));
+    x++;
+
+    parser.updateVariable("x", x);
+    LOG(parser.eval(pn));
+
+    parser.deleteVariable("x");
+
     if (rpn_score == (int)input.size() && evaluation_score == (int)input.size()) return false;
 
   }
