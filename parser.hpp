@@ -114,9 +114,9 @@ private:
 
     std::string joiner;
 
-    for (char const& i : infix){
+    for (int i = 0; i < infix.length(); i++){
       std::stringstream ss;
-      ss << i;
+      ss << infix[i];
       std::string item = ss.str();
 
       bool isOperator = inVector(item, operators);
@@ -127,13 +127,30 @@ private:
       }
 
       if (isOperator || isSymbol){
-        joiner = "";
-        for (auto const& j : store) joiner += j;
-        store.clear();
-        values.push_back(joiner);
-        values.push_back(item);
+
+        bool lastNumOperator = false;
+
+        if (values.size() > 0){
+          if (inVector(values.back(), operators)) lastNumOperator = true;
+        }
+
+        if ((int)store.size() > 0 && lastNumOperator) lastNumOperator = false;
+
+        if (item == "-" && ((i == 0) || (lastNumOperator))){
+          store.push_back(item);
+        }
+
+        else{
+          joiner = "";
+          for (auto const& j : store) joiner += j;
+          store.clear();
+          values.push_back(joiner);
+          values.push_back(item);
+        }
       }
     }
+
+    // Dump Store
 
     if (store.size() > 0){
       joiner = "";
