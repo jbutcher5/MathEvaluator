@@ -68,11 +68,11 @@ public:
           resultStack.pop();
         }
 
-        resultStack.push((double)operatorMap[token](values[0], values[1]));
+        resultStack.push((double)operatorMap[token](values[1], values[0]));
       }
       
       else if (isOperand){
-        resultStack.push(std::stod(token));
+        resultStack.push(round(std::stod(token) * 10000) / 10000);
       }
 
       else if (isVariable){
