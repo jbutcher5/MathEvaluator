@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cmath>
 #include <iterator>
+#include <limits>
 #include <map>
 #include <math.h>
 #include <sstream>
@@ -39,6 +40,12 @@ public:
   MathsParser(){
     populateArrays();
   }
+
+  void addVariable(std::string name, double &value){
+    externalVariablesMap.insert(std::pair<std::string, double>(name, value));
+    externalVariables.push_back(name);
+  }
+
 
   mp_RPN reversePolishNotation(std::string infix){
     return shunting_yard(seperate(infix));
@@ -280,15 +287,10 @@ private:
   void populateArrays(){
     for (auto const &element : operatorMap) operators.push_back(element.first);
     for (auto const &element : functionsMap) functions.push_back(element.first);
-    for (auto const &element : externalVariablesMap) externalVariables.push_back(element.first);
   }
 
   bool inVector(std::string item, std::vector<std::string> vector){
-    for (auto const& i : vector){
-
-      if (item == i) return true;
-
-    }
+    for (auto const& i : vector) if (item == i) return true;
 
     return false;
 
