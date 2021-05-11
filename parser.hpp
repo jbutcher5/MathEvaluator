@@ -41,11 +41,18 @@ public:
     populateArrays();
   }
 
-  void addVariable(std::string name, double &value){
+  void addVariable(std::string name, double value){
     externalVariablesMap.insert(std::pair<std::string, double>(name, value));
     externalVariables.push_back(name);
   }
 
+  void updateVariable(std::string name, double value){
+    externalVariablesMap[name] = value;
+  }
+
+  void deleteVariable(std::string name){
+    externalVariablesMap.erase(name);
+  }
 
   mp_RPN reversePolishNotation(std::string infix){
     return shunting_yard(seperate(infix));
