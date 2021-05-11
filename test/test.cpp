@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "parser.hpp"
+#include "../src/parser.hpp"
 
 #define LOG(x) std::cout << x << std::endl
 
