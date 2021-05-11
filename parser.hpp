@@ -83,7 +83,7 @@ public:
         if (functionParameters[token] == 1){
           double value = resultStack.top();
           resultStack.pop();
-          functionsMap[token](value);
+          resultStack.push(functionsMap[token](value));
         }
 
         else if (functionParameters[token] == 2){
@@ -94,7 +94,7 @@ public:
             resultStack.pop();
           }
 
-          multipleParameterFunction[token](values[0], values[1]);
+          resultStack.push(multipleParameterFunction[token](values[1], values[0]));
         }
       }
 
