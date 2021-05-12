@@ -35,9 +35,9 @@ inline double round(double val)
     return floor(val + 0.5);
 }
 
-class MathsParser{
+class MathParser{
 public:
-  MathsParser(){
+  MathParser(){
     populateArrays();
   }
 
