@@ -41,13 +41,10 @@ public:
     populateArrays();
   }
 
-  void addVariable(std::string name, double value){
-    externalVariablesMap.insert(std::pair<std::string, double>(name, value));
-    externalVariables.push_back(name);
-  }
-
-  void updateVariable(std::string name, double value){
+  void appendVariable(std::string name, double value){
     externalVariablesMap[name] = value;
+
+    if (!inVector(name, externalVariables)) externalVariables.push_back(name);
   }
 
   void deleteVariable(std::string name){
