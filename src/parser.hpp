@@ -35,23 +35,21 @@ inline double round(double val)
     return floor(val + 0.5);
 }
 
-class MathsParser{
+class MathParser{
 public:
-  MathsParser(){
+  MathParser(){
     populateArrays();
   }
 
-  void addVariable(std::string name, double value){
-    externalVariablesMap.insert(std::pair<std::string, double>(name, value));
-    externalVariables.push_back(name);
-  }
-
-  void updateVariable(std::string name, double value){
+  void appendVariable(std::string name, double value){
     externalVariablesMap[name] = value;
+
+    if (!inVector(name, externalVariables)) externalVariables.push_back(name);
   }
 
   void deleteVariable(std::string name){
     externalVariablesMap.erase(name);
+    removeItemInVector(name, externalVariables);
   }
 
   mp_RPN reversePolishNotation(std::string infix){
@@ -302,4 +300,9 @@ private:
     return false;
 
   }
+
+  void removeItemInVector(std::string item, std::vector<std::string> vector){
+    vector.erase(std::find(vector.begin(), vector.end(), item));
+  }
+
 };
