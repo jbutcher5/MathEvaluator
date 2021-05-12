@@ -49,6 +49,7 @@ public:
 
   void deleteVariable(std::string name){
     externalVariablesMap.erase(name);
+    removeItemInVector(name, externalVariables);
   }
 
   mp_RPN reversePolishNotation(std::string infix){
@@ -299,4 +300,9 @@ private:
     return false;
 
   }
+
+  void removeItemInVector(std::string item, std::vector<std::string> vector){
+    vector.erase(std::find(vector.begin(), vector.end(), item));
+  }
+
 };
