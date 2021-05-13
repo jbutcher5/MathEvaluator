@@ -27,9 +27,9 @@ struct mp_RPN : public mp_SepValues{
   std::vector<std::string> RPNValues;
 };
 
-float fpow(double x, double y) { return (float)pow(x, y); }
+inline float fpow(double x, double y) { return (float)pow(x, y); }
 
-float mod(double x, double y) { return (float)((int)x%(int)y); }
+inline float mod(double x, double y) { return (float)((int)x%(int)y); }
 
 inline double round(double val)
 {
