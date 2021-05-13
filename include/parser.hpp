@@ -52,7 +52,20 @@ public:
     removeItemInVector(name, externalVariables);
   }
 
-  mp_RPN reversePolishNotation(std::string infix){
+  mp_RPN reversePolishNotation(std::string infix, bool doCache = true){
+    if (doCache){
+      if (inVector(infix, cachedVariables)){
+        return cachedRPN[infix];
+      }
+
+      if (!inVector(infix, cachedVariables)){
+        cachedVariables.push_back(infix);
+        cachedRPN[infix] = shunting_yard(seperate(infix));
+
+        return cachedRPN[infix];
+      }
+    }
+
     return shunting_yard(seperate(infix));
   }
 
@@ -258,9 +271,11 @@ private:
 
   }
 
-  std::map<std::string, double (*)(double, double)> multipleParameterFunction = {};
+  std::map<std::string, mp_RPN> cachedRPN;
 
-  std::map<std::string, double> externalVariablesMap = {};
+  std::map<std::string, double (*)(double, double)> multipleParameterFunction;
+
+  std::map<std::string, double> externalVariablesMap;
 
   std::map<std::string, double (*)(double)> functionsMap = {
       {"sin", sin},   {"cos", cos},   {"tan", tan},
@@ -284,6 +299,7 @@ private:
   std::map<std::string, int> operatorAssociative = {
       {"^", 1}, {"*", 0}, {"/", 0}, {"+", 0}, {"-", 0}};
 
+  std::vector<std::string> cachedVariables;
   std::vector<std::string> externalVariables;
   std::vector<std::string> functions;
   std::vector<std::string> operators;
