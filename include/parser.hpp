@@ -29,6 +29,8 @@ struct mp_RPN : public mp_SepValues{
 
 float fpow(double x, double y) { return (float)pow(x, y); }
 
+float mod(double x, double y) { return (float)((int)x%(int)y); }
+
 inline double round(double val)
 {
     if( val < 0 ) return ceil(val - 0.5);
@@ -282,22 +284,22 @@ private:
       {"asin", asin}, {"acos", acos}, {"atan", atan}};
 
   std::map<std::string, std::string> operatorTranslationTable = {
-      {"^", "pow"}, {"*", "mul"}, {"/", "div"}, {"+", "add"}, {"-", "sub"}};
+      {"^", "pow"}, {"*", "mul"}, {"/", "div"}, {"+", "add"}, {"-", "sub"}, {"%", "mod"}};
 
   std::map<std::string, int> functionParameters = {
       {"sin", 1},   {"cos", 1},   {"tan", 1},
       {"asin", 1}, {"acos", 1}, {"atan", 1},
       {"pow", 2}, {"mul", 2}, {"div", 2},
-      {"add", 2}, {"sub", 2}};
+      {"add", 2}, {"sub", 2}, {"mod", 2}};
 
   std::map<std::string, int> operatorPrecedence = {
-      {"^", 4}, {"*", 3}, {"/", 3}, {"+", 2}, {"-", 2}};
+      {"^", 4}, {"*", 3}, {"/", 3}, {"%", 3}, {"+", 2}, {"-", 2}};
 
   std::map<std::string, float (*)(double, double)> operatorMap = {
-      {"^", fpow}, {"+", fadd}, {"-", fsub}, {"*", fmul}, {"/", fdiv}};
+      {"^", fpow}, {"+", fadd}, {"-", fsub}, {"*", fmul}, {"/", fdiv}, {"%", mod}};
 
   std::map<std::string, int> operatorAssociative = {
-      {"^", 1}, {"*", 0}, {"/", 0}, {"+", 0}, {"-", 0}};
+      {"^", 1}, {"*", 0}, {"/", 0}, {"+", 0}, {"-", 0}, {"%", 0}};
 
   std::vector<std::string> cachedVariables;
   std::vector<std::string> externalVariables;
