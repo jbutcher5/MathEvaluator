@@ -27,13 +27,11 @@ struct mp_RPN : public mp_SepValues{
   std::vector<std::string> RPNValues;
 };
 
-float fpow(double x, double y) { return (float)pow(x, y); }
+inline float fpow(double x, double y) { return (float)pow(x, y); }
 
-inline double round(double val)
-{
-    if( val < 0 ) return ceil(val - 0.5);
-    return floor(val + 0.5);
-}
+inline float mod(double x, double y) { return (float)((int)x % (int)y); }
+
+inline float fsqrt(double x) { return (float)sqrt(x); };
 
 class MathParser{
 public:
@@ -52,8 +50,27 @@ public:
     removeItemInVector(name, externalVariables);
   }
 
-  mp_RPN reversePolishNotation(std::string infix){
+  mp_RPN reversePolishNotation(std::string infix, bool doCache = true){
+    if (doCache){
+      if (inVector(infix, cachedVariables)){
+        return cachedRPN[infix];
+      }
+
+      if (!inVector(infix, cachedVariables)){
+        cachedVariables.push_back(infix);
+        cachedRPN[infix] = shunting_yard(seperate(infix));
+
+        return cachedRPN[infix];
+      }
+    }
+
     return shunting_yard(seperate(infix));
+  }
+
+  double eval(){
+    if (!(cachedVariables.size() > 0)) return 0.0;
+
+    return eval(cachedRPN[cachedVariables.at(-1)]);
   }
 
   double eval(mp_RPN RPN){
@@ -258,32 +275,37 @@ private:
 
   }
 
-  std::map<std::string, double (*)(double, double)> multipleParameterFunction = {};
+  std::map<std::string, mp_RPN> cachedRPN;
 
-  std::map<std::string, double> externalVariablesMap = {};
+  std::map<std::string, double (*)(double, double)> multipleParameterFunction;
+
+  std::map<std::string, double> externalVariablesMap;
 
   std::map<std::string, double (*)(double)> functionsMap = {
       {"sin", sin},   {"cos", cos},   {"tan", tan},
-      {"asin", asin}, {"acos", acos}, {"atan", atan}};
+      {"asin", asin}, {"acos", acos}, {"atan", atan},
+      {"sqrt", sqrt}};
 
   std::map<std::string, std::string> operatorTranslationTable = {
-      {"^", "pow"}, {"*", "mul"}, {"/", "div"}, {"+", "add"}, {"-", "sub"}};
+      {"^", "pow"}, {"*", "mul"}, {"/", "div"}, {"+", "add"}, {"-", "sub"}, {"%", "mod"}};
 
   std::map<std::string, int> functionParameters = {
       {"sin", 1},   {"cos", 1},   {"tan", 1},
       {"asin", 1}, {"acos", 1}, {"atan", 1},
       {"pow", 2}, {"mul", 2}, {"div", 2},
-      {"add", 2}, {"sub", 2}};
+      {"add", 2}, {"sub", 2}, {"mod", 2},
+      {"sqrt", 1}};
 
   std::map<std::string, int> operatorPrecedence = {
-      {"^", 4}, {"*", 3}, {"/", 3}, {"+", 2}, {"-", 2}};
+      {"^", 4}, {"*", 3}, {"/", 3}, {"%", 3}, {"+", 2}, {"-", 2}};
 
   std::map<std::string, float (*)(double, double)> operatorMap = {
-      {"^", fpow}, {"+", fadd}, {"-", fsub}, {"*", fmul}, {"/", fdiv}};
+      {"^", fpow}, {"+", fadd}, {"-", fsub}, {"*", fmul}, {"/", fdiv}, {"%", mod}};
 
   std::map<std::string, int> operatorAssociative = {
-      {"^", 1}, {"*", 0}, {"/", 0}, {"+", 0}, {"-", 0}};
+      {"^", 1}, {"*", 0}, {"/", 0}, {"+", 0}, {"-", 0}, {"%", 0}};
 
+  std::vector<std::string> cachedVariables;
   std::vector<std::string> externalVariables;
   std::vector<std::string> functions;
   std::vector<std::string> operators;
@@ -294,8 +316,11 @@ private:
     for (auto const &element : functionsMap) functions.push_back(element.first);
   }
 
-  bool inVector(std::string item, std::vector<std::string> vector){
-    for (auto const& i : vector) if (item == i) return true;
+  bool inVector(std::string item, std::vector<std::string> v){
+
+    auto result = std::find(v.begin(), v.end(), item);
+
+    if (result != std::end(v)) return true;
 
     return false;
 
