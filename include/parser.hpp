@@ -71,6 +71,12 @@ public:
     return shunting_yard(seperate(infix));
   }
 
+  double eval(){
+    if (!(cachedVariables.size() > 0)) return 0.0;
+
+    return eval(cachedRPN[cachedVariables.at(-1)]);
+  }
+
   double eval(mp_RPN RPN){
 
     std::stack<double> resultStack;
@@ -312,8 +318,11 @@ private:
     for (auto const &element : functionsMap) functions.push_back(element.first);
   }
 
-  bool inVector(std::string item, std::vector<std::string> vector){
-    for (auto const& i : vector) if (item == i) return true;
+  bool inVector(std::string item, std::vector<std::string> v){
+
+    auto result = std::find(v.begin(), v.end(), item);
+
+    if (result != std::end(v)) return true;
 
     return false;
 
