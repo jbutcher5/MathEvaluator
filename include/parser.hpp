@@ -29,13 +29,9 @@ struct mp_RPN : public mp_SepValues{
 
 inline float fpow(double x, double y) { return (float)pow(x, y); }
 
-inline float mod(double x, double y) { return (float)((int)x%(int)y); }
+inline float mod(double x, double y) { return (float)((int)x % (int)y); }
 
-inline double round(double val)
-{
-    if( val < 0 ) return ceil(val - 0.5);
-    return floor(val + 0.5);
-}
+inline float fsqrt(double x) { return (float)sqrt(x); };
 
 class MathParser{
 public:
@@ -287,7 +283,8 @@ private:
 
   std::map<std::string, double (*)(double)> functionsMap = {
       {"sin", sin},   {"cos", cos},   {"tan", tan},
-      {"asin", asin}, {"acos", acos}, {"atan", atan}};
+      {"asin", asin}, {"acos", acos}, {"atan", atan},
+      {"sqrt", sqrt}};
 
   std::map<std::string, std::string> operatorTranslationTable = {
       {"^", "pow"}, {"*", "mul"}, {"/", "div"}, {"+", "add"}, {"-", "sub"}, {"%", "mod"}};
@@ -296,7 +293,8 @@ private:
       {"sin", 1},   {"cos", 1},   {"tan", 1},
       {"asin", 1}, {"acos", 1}, {"atan", 1},
       {"pow", 2}, {"mul", 2}, {"div", 2},
-      {"add", 2}, {"sub", 2}, {"mod", 2}};
+      {"add", 2}, {"sub", 2}, {"mod", 2},
+      {"sqrt", 1}};
 
   std::map<std::string, int> operatorPrecedence = {
       {"^", 4}, {"*", 3}, {"/", 3}, {"%", 3}, {"+", 2}, {"-", 2}};
