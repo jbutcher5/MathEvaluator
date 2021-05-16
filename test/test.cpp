@@ -5,8 +5,8 @@
 
 #define LOG(x) std::cout << x << std::endl
 
-bool eval(std::vector<std::string> input, std::vector<std::string> RPN, std::vector<double> result){
-  if (input.size() != RPN.size()){
+bool test(std::vector<std::string> input, std::vector<std::string> RPN, std::vector<double> result){
+  if (input.size() != RPN.size() || input.size() != result.size() || RPN.size() != result.size()){
     LOG("Test Failed!");
     LOG("Invalid Lengths!");
     return true;
@@ -64,5 +64,5 @@ int main(){
   std::vector<std::string> RPN = {"11+", "52%", "483*+", "-52030*+", "48+3*", "69+42*42^++", "21421+*3++*", "5.95.3-7.2*1.42^+", "220*2/34+32^*+6-15+", "1.5707963267948966sin", "4sqrt"};
   std::vector<double> result = {2, 1, 28, 595, 36, 39, 32, 6.28, 92, 1, 2};
 
-  return eval(input, RPN, result);
+  return test(input, RPN, result);
 }
