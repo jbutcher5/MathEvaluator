@@ -16,6 +16,7 @@
 #include <stack>
 #include <utility>
 #include <tuple>
+#include <future>
 
 struct mp_SepValues{
   std::vector<std::string> infixValues;
@@ -329,5 +330,15 @@ private:
   void removeItemInVector(std::string item, std::vector<std::string> vector){
     vector.erase(std::find(vector.begin(), vector.end(), item));
   }
-
 };
+
+
+static double _evaluate(std::string infix){
+  MathParser parser;
+  mp_RPN rpn = parser.reversePolishNotation(infix);
+  return parser.eval(rpn);
+}
+
+std::future<double> evaluate(std::string infix){
+  return std::async(std::launch::async, _evaluate, infix);
+}
