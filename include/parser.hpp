@@ -330,3 +330,8 @@ private:
     vector.erase(std::find(vector.begin(), vector.end(), item));
   }
 };
+
+double evaluate(std::string infix){
+  MathParser parser;
+  return parser.eval(parser.reversePolishNotation(infix));
+}
