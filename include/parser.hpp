@@ -143,7 +143,7 @@ private:
 
     std::string joiner;
 
-    for (int i = 0; i < infix.length(); i++){
+    for (int i = 0; i < (int)infix.length(); i++){
       std::stringstream ss;
       ss << infix[i];
       std::string item = ss.str();
