@@ -6,6 +6,11 @@ MathParser is quite a basic C++ header file that evaluates infix math expression
 
 ### Basic Eval
 ```c++
+double result = evaluate("1+1");
+```
+
+### Basic Eval (With MathParser Class)
+```c++
 MathParser parser
 mp_RPN rpn = parser.reversePolishNotation("1+1");
 
