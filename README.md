@@ -6,7 +6,7 @@ MathParser is quite a basic C++ header file that evaluates infix math expression
 
 ### Basic Eval
 ```c++
-double result = evaluate("1+1");
+double result = evaluate("1+1"); // returns 2
 ```
 
 ### Basic Eval (With MathParser Class)
