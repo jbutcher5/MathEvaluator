@@ -31,7 +31,15 @@ inline float fpow(double x, double y) { return (float)pow(x, y); }
 
 inline float mod(double x, double y) { return (float)((int)x % (int)y); }
 
-inline float fsqrt(double x) { return (float)sqrt(x); };
+inline float fsqrt(double x) { return (float)sqrt(x); }
+
+inline float add(double x, double y) { return (float)(x+y); }
+
+inline float mul(double x, double y) { return (float)(x*y); }
+
+inline float div(double x, double y) { return (float)(x/y); }
+
+inline float sub(double x, double y) { return (float)(x-y); }
 
 class MathParser{
 public:
@@ -300,7 +308,7 @@ private:
       {"^", 4}, {"*", 3}, {"/", 3}, {"%", 3}, {"+", 2}, {"-", 2}};
 
   std::map<std::string, float (*)(double, double)> operatorMap = {
-      {"^", fpow}, {"+", fadd}, {"-", fsub}, {"*", fmul}, {"/", fdiv}, {"%", mod}};
+      {"^", fpow}, {"+", add}, {"-", sub}, {"*", mul}, {"/", div}, {"%", mod}};
 
   std::map<std::string, int> operatorAssociative = {
       {"^", 1}, {"*", 0}, {"/", 0}, {"+", 0}, {"-", 0}, {"%", 0}};
