@@ -2,7 +2,6 @@
 #include <string>
 #include <vector>
 #include "../include/parser.hpp"
-#include <functional>
 
 #define LOG(x) std::cout << x << std::endl
 
@@ -65,9 +64,5 @@ int main(){
   std::vector<std::string> RPN = {"11+", "52%", "483*+", "-52030*+", "48+3*", "69+42*42^++", "21421+*3++*", "5.95.3-7.2*1.42^+", "220*2/34+32^*+6-15+", "1.5707963267948966sin", "4sqrt"};
   std::vector<double> result = {2, 1, 28, 595, 36, 39, 32, 6.28, 92, 1, 2};
 
-  int e = test(input, RPN, result);
-
-  std::cout << std::plus<int>{}(10, 10) << std::endl;
-
-  return e;
+  return test(input, RPN, result);
 }
