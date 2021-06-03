@@ -1,21 +1,15 @@
 #pragma once
 
 #include <array>
-#include <iostream>
 #include <cmath>
 #include <iterator>
-#include <limits>
 #include <map>
-#include <math.h>
 #include <sstream>
 #include <string>
-#include <sys/types.h>
-#include <type_traits>
 #include <vector>
 #include <algorithm>
 #include <stack>
 #include <utility>
-#include <tuple>
 
 struct mp_SepValues{
   std::vector<std::string> infixValues;
