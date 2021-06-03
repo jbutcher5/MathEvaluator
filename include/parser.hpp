@@ -139,9 +139,7 @@ private:
     std::string joiner;
 
     for (int i = 0; i < (int)infix.length(); i++){
-      std::stringstream ss;
-      ss << infix[i];
-      std::string item = ss.str();
+      std::string item(1, infix[i]);
 
       bool isOperator = inVector(item, operators);
       bool isSymbol = inVector(item, symbols);
