@@ -42,8 +42,6 @@ double result1 = parser.eval(rpn); // returns 21
 
 x = 10;
 
-parser.appendVariable("x", x);
-
 double result2 = parser.eval(rpn); // returns 11
 ```
 ### Functions Eval
