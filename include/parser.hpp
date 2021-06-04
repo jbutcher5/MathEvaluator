@@ -34,8 +34,8 @@ public:
     populateArrays();
   }
 
-  void appendVariable(std::string name, double *value){
-    externalVariablesMap[name] = value;
+  void appendVariable(std::string name, double &value){
+    externalVariablesMap[name] = &value;
 
     if (!inVector(name, externalVariables)) externalVariables.push_back(name);
   }
