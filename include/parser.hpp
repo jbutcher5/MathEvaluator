@@ -34,7 +34,7 @@ public:
     populateArrays();
   }
 
-  void appendVariable(std::string name, double value){
+  void appendVariable(std::string name, double *value){
     externalVariablesMap[name] = value;
 
     if (!inVector(name, externalVariables)) externalVariables.push_back(name);
@@ -100,7 +100,7 @@ public:
       }
 
       else if (isVariable){
-        resultStack.push((double)externalVariablesMap[token]);
+        resultStack.push((double)*externalVariablesMap[token]);
       }
 
       if (isFunction){
@@ -272,7 +272,7 @@ private:
 
   std::map<std::string, double (*)(double, double)> multipleParameterFunction;
 
-  std::map<std::string, double> externalVariablesMap;
+  std::map<std::string, double*> externalVariablesMap;
 
   std::map<std::string, double (*)(double)> functionsMap = {
       {"sin", sin},   {"cos", cos},   {"tan", tan},
