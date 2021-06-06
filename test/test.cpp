@@ -17,7 +17,7 @@ bool test(std::vector<std::string> input, std::vector<std::string> RPN, std::vec
 
     MathParser parser;
 
-    parser.appendVariable("x", &x);
+    parser.appendVariable("x", x);
 
     int rpn_score = 0;
     int evaluation_score = 0;
