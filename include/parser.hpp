@@ -65,7 +65,7 @@ public:
   double eval(){
     if (!(cachedVariables.size() > 0)) return 0.0;
 
-    return eval(cachedRPN[cachedVariables.at(-1)]);
+    return eval(cachedRPN[cachedVariables.back()]);
   }
 
   double eval(mp_RPN RPN){
