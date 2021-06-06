@@ -12,8 +12,8 @@
 #include <utility>
 
 struct Token{
-    std::string value;
-    std::string type;
+  std::string value;
+  std::string type;
 };
 
 struct mp_SepValues{
