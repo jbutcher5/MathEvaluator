@@ -11,14 +11,19 @@
 #include <stack>
 #include <utility>
 
+struct Token{
+    std::string value;
+    std::string type;
+};
+
 struct mp_SepValues{
-  std::vector<std::string> infixValues;
+  std::vector<Token> infixValues;
   std::string infix;
 };
 
 struct mp_RPN : public mp_SepValues{
   std::string RPN;
-  std::vector<std::string> RPNValues;
+  std::vector<Token> RPNValues;
 };
 
 inline float _pow(double x, double y) { return (float)pow(x, y); }
@@ -72,15 +77,15 @@ public:
 
     std::stack<double> resultStack;
 
-    for (std::string const& token : RPN.RPNValues){
+    for (Token const& token : RPN.RPNValues){
 
-      bool isOperator = inVector(token, operators);
-      bool isFunction = inVector(token, functions);
-      bool isVariable = inVector(token, externalVariables);
+      bool isOperator = token.type == "operator";
+      bool isFunction = token.type == "function";
+      bool isVariable = inVector(token.value, externalVariables);
       bool isOperand = !isOperator && !isFunction && !isVariable;
 
       if (isOperator){
-        std::string functionName = operatorTranslationTable[token];
+        std::string functionName = operatorTranslationTable[token.value];
         int operands = functionParameters[functionName];
 
         if (operands > (int)resultStack.size()) return 0.0;
@@ -92,25 +97,25 @@ public:
           resultStack.pop();
         }
 
-        resultStack.push((double)operatorMap[token](values[1], values[0]));
+        resultStack.push((double)operatorMap[token.value](values[1], values[0]));
       }
       
       else if (isOperand){
-        resultStack.push(round(std::stod(token) * 10000) / 10000);
+        resultStack.push(round(std::stod(token.value) * 10000) / 10000);
       }
 
       else if (isVariable){
-        resultStack.push((double)*externalVariablesMap[token]);
+        resultStack.push((double)*externalVariablesMap[token.value]);
       }
 
       if (isFunction){
-        if (functionParameters[token] == 1){
+        if (functionParameters[token.value] == 1){
           double value = resultStack.top();
           resultStack.pop();
-          resultStack.push(functionsMap[token](value));
+          resultStack.push(functionsMap[token.value](value));
         }
 
-        else if (functionParameters[token] == 2){
+        else if (functionParameters[token.value] == 2){
           std::array<double, 2> values;
 
           for (int i = 0; i < 2; i++){
@@ -118,7 +123,7 @@ public:
             resultStack.pop();
           }
 
-          resultStack.push(multipleParameterFunction[token](values[1], values[0]));
+          resultStack.push(multipleParameterFunction[token.value](values[1], values[0]));
         }
       }
 
@@ -130,7 +135,11 @@ public:
   }
 
 private:
+
   mp_SepValues seperate(std::string infix){
+
+    // Remove White Space
+
     remove(infix.begin(), infix.end(), ' ');
 
     std::vector<std::string> store;
@@ -140,6 +149,8 @@ private:
 
     for (int i = 0; i < (int)infix.length(); i++){
       std::string item(1, infix[i]);
+
+      // Deduce Type
 
       bool isOperator = inVector(item, operators);
       bool isSymbol = inVector(item, symbols);
@@ -182,19 +193,43 @@ private:
 
     mp_SepValues result;
     result.infix = infix;
-    result.infixValues = values;
+
+    // Deduce Type From Tokens
+
+    std::vector<Token> typedValues;
+
+    for (auto const& i : values){
+
+      std::string type;
+
+      bool isOperator = inVector(i, operators);
+      bool isFunction = !isOperator && inVector(i, functions);
+      bool isSymbol = !isOperator && !isFunction && inVector(i, symbols);
+      bool isOperand = !isOperator && !isFunction && !isSymbol;
+
+      if (isOperator) type = "operator";
+      if (isFunction) type = "function";
+      if (isSymbol) type = "symbol";
+      if (isOperand) type = "operand";
+
+      Token item = {i, type};
+
+      typedValues.push_back(item);
+    }
+
+    result.infixValues = typedValues;
 
     return result;
   }
 
   mp_RPN shunting_yard(mp_SepValues sep){
-    std::stack<std::string> stack;
-    std::vector<std::string> queue;
+    std::stack<Token> stack;
+    std::vector<Token> queue;
 
     for (auto const& i : sep.infixValues){
-      bool isOperator = inVector(i, operators);
-      bool isFunction = inVector(i, functions);
-      bool isSymbol = inVector(i, symbols);
+      bool isOperator = i.type == "operator";
+      bool isFunction = i.type == "function";
+      bool isSymbol = i.type == "symbol";
 
       if (!isOperator && !isFunction && !isSymbol) {
         queue.push_back(i);
@@ -206,8 +241,8 @@ private:
 
       else if (isOperator && !isFunction && !isSymbol) {
         while(stack.size() > 0){
-          if(((inVector(stack.top(), operators)) && (operatorPrecedence[stack.top()] > operatorPrecedence[i]))
-             || ((operatorPrecedence[stack.top()] == operatorPrecedence[i]) && (operatorAssociative[stack.top()] == 0) && (stack.top() != "("))){
+          if(((stack.top().type == "operator") && (operatorPrecedence[stack.top().value] > operatorPrecedence[i.value]))
+             || ((operatorPrecedence[stack.top().value] == operatorPrecedence[i.value]) && (operatorAssociative[stack.top().value] == 0) && (stack.top().value != "("))){
 
             queue.push_back(stack.top());
             stack.pop();
@@ -222,22 +257,22 @@ private:
 
       }
 
-      else if (i == "("){
+      else if (i.value == "("){
         stack.push(i);
       }
 
-      else if (i == ")"){
-        while ((stack.top() != "(")){
+      else if (i.value == ")"){
+        while ((stack.top().value != "(")){
           queue.push_back(stack.top());
           stack.pop();
         }
 
-        if (stack.top() == "("){
+        if (stack.top().value == "("){
           stack.pop();
         }
 
         if (stack.size() > 0){
-          if (inVector(stack.top(), functions)){
+          if (inVector(stack.top().value, functions)){
             queue.push_back(stack.top());
             stack.pop();
           }
@@ -251,11 +286,11 @@ private:
     }
 
     std::string joiner = "";
-    std::vector<std::string> fixedQueue;
+    std::vector<Token> fixedQueue;
 
     for (auto const& i : queue){
-      joiner += i;
-      if (i != "") fixedQueue.push_back(i);
+      joiner += i.value;
+      if (i.value != "") fixedQueue.push_back(i);
     }
 
     mp_RPN result;
