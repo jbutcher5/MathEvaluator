@@ -13,7 +13,11 @@ bool test(std::vector<std::string> input, std::vector<std::string> RPN, std::vec
   }
 
   else {
+    double x = 10;
+
     MathParser parser;
+
+    parser.appendVariable("x", &x);
 
     int rpn_score = 0;
     int evaluation_score = 0;
@@ -60,9 +64,9 @@ bool test(std::vector<std::string> input, std::vector<std::string> RPN, std::vec
 }
 
 int main(){
-  std::vector<std::string> input = {"1+1", "5%2", "4+8*3", "-5+20*30", "(4+8)*3", "6+9+(4*2+4^2)", "2*(1+(4*(2+1)+3))", "(5.9-5.3)*7.2+1.4^2", "2*20/2+(3+4)*3^2-6+15", "sin(1.5707963267948966)", "sqrt(4)"};
-  std::vector<std::string> RPN = {"11+", "52%", "483*+", "-52030*+", "48+3*", "69+42*42^++", "21421+*3++*", "5.95.3-7.2*1.42^+", "220*2/34+32^*+6-15+", "1.5707963267948966sin", "4sqrt"};
-  std::vector<double> result = {2, 1, 28, 595, 36, 39, 32, 6.28, 92, 1, 2};
+  std::vector<std::string> input = {"1+1", "5%2", "4+8*3", "-5+20*30", "(4+8)*3", "6+9+(4*2+4^2)", "2*(1+(4*(2+1)+3))", "(5.9-5.3)*7.2+1.4^2", "2*20/2+(3+4)*3^2-6+15", "sin(1.5707963267948966)", "sqrt(4)", "x", "x+3"};
+  std::vector<std::string> RPN = {"11+", "52%", "483*+", "-52030*+", "48+3*", "69+42*42^++", "21421+*3++*", "5.95.3-7.2*1.42^+", "220*2/34+32^*+6-15+", "1.5707963267948966sin", "4sqrt", "x", "x3+"};
+  std::vector<double> result = {2, 1, 28, 595, 36, 39, 32, 6.28, 92, 1, 2, 10, 13};
 
   return test(input, RPN, result);
 }
