@@ -39,18 +39,18 @@ public:
     populateArrays();
   }
 
-  void appendVariable(std::string name, double &value){
+  void appendVariable(const std::string name, double &value){
     externalVariablesMap[name] = &value;
 
     if (!inVector(name, externalVariables)) externalVariables.push_back(name);
   }
 
-  void deleteVariable(std::string name){
+  void deleteVariable(const std::string name){
     externalVariablesMap.erase(name);
     removeItemInVector(name, externalVariables);
   }
 
-  mp_RPN compile(std::string infix, bool doCache = true){
+  mp_RPN compile(const std::string infix, const bool doCache = true){
     if (doCache){
       if (inVector(infix, cachedVariables)){
         return cachedRPN[infix];
@@ -77,7 +77,7 @@ public:
     return eval(compile(expr));
   }
 
-  double eval(mp_RPN RPN){
+  double eval(const mp_RPN RPN){
 
     std::stack<double> resultStack;
 
@@ -226,7 +226,7 @@ private:
     return result;
   }
 
-  mp_RPN shunting_yard(mp_SepValues sep){
+  mp_RPN shunting_yard(const mp_SepValues sep){
     std::stack<Token> stack;
     std::vector<Token> queue;
 
@@ -348,13 +348,13 @@ private:
     for (auto const &element : functionsMap) functions.push_back(element.first);
   }
 
-  bool inVector(std::string item, std::vector<std::string> v){
+  bool inVector(const std::string item, const std::vector<std::string> v){
 
     return std::find(v.begin(), v.end(), item) != std::end(v);
 
   }
 
-  void removeItemInVector(std::string item, std::vector<std::string> vector){
+  void removeItemInVector(const std::string item, std::vector<std::string> vector){
     vector.erase(std::find(vector.begin(), vector.end(), item));
   }
 };
