@@ -27,7 +27,7 @@ bool test(std::vector<std::string> input, std::vector<std::string> RPN, std::vec
     LOG("Convertion");
 
     for (int x = 0; x < (int)input.size(); x++){
-      mp_RPN u = parser.reversePolishNotation(input[x]);
+      mp_RPN u = parser.compile(input[x]);
       if (u.RPN == RPN[x]){
         std::cout << input[x] << " -> " << RPN[x] << " | " << "Success" << std::endl;
         rpn_score++;
