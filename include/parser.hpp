@@ -350,11 +350,7 @@ private:
 
   bool inVector(std::string item, std::vector<std::string> v){
 
-    auto result = std::find(v.begin(), v.end(), item);
-
-    if (result != std::end(v)) return true;
-
-    return false;
+    return std::find(v.begin(), v.end(), item) != std::end(v);
 
   }
 
