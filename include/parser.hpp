@@ -359,7 +359,7 @@ private:
   }
 };
 
-double evaluate(std::string infix){
+double evaluate(const std::string infix){
   MathParser parser;
   return parser.eval(infix);
 }
