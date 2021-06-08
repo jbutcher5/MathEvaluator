@@ -73,6 +73,10 @@ public:
     return eval(cachedRPN[cachedVariables.back()]);
   }
 
+  double eval(const std::string expr){
+    return eval(compile(expr));
+  }
+
   double eval(mp_RPN RPN){
 
     std::stack<double> resultStack;
