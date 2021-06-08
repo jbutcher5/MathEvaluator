@@ -50,7 +50,7 @@ public:
     removeItemInVector(name, externalVariables);
   }
 
-  mp_RPN reversePolishNotation(std::string infix, bool doCache = true){
+  mp_RPN compile(std::string infix, bool doCache = true){
     if (doCache){
       if (inVector(infix, cachedVariables)){
         return cachedRPN[infix];
