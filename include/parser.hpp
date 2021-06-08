@@ -365,5 +365,5 @@ private:
 
 double evaluate(std::string infix){
   MathParser parser;
-  return parser.eval(parser.reversePolishNotation(infix));
+  return parser.eval(infix);
 }
