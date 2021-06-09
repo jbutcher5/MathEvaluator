@@ -50,38 +50,13 @@ public:
     removeItemInVector(name, externalVariables);
   }
 
-  mp_RPN compile(const std::string infix, const bool doCache = true){
-    if (doCache){
-      if (inVector(infix, cachedVariables)){
-        return cachedRPN[infix];
-      }
-
-      if (!inVector(infix, cachedVariables)){
-        cachedVariables.push_back(infix);
-        cachedRPN[infix] = shunting_yard(seperate(infix));
-
-        return cachedRPN[infix];
-      }
-    }
-
-    return shunting_yard(seperate(infix));
-  }
-
-  double eval(){
-    if (!(cachedVariables.size() > 0)) return 0.0;
-
-    return eval(cachedRPN[cachedVariables.back()]);
-  }
-
   double eval(const std::string expr){
-    return eval(compile(expr));
-  }
 
-  double eval(const mp_RPN RPN){
+    rpn = compile(expr);
 
     std::stack<double> resultStack;
 
-    for (Token const& token : RPN.RPNValues){
+    for (Token const& token : rpn.RPNValues){
 
       bool isOperator = token.type == "operator";
       bool isFunction = token.type == "function";
@@ -138,13 +113,11 @@ public:
     return round(resultStack.top() * 10000) / 10000;
   }
 
+  mp_RPN rpn;
+
 private:
 
   mp_SepValues seperate(std::string infix){
-
-    // Remove White Space
-
-    remove(infix.begin(), infix.end(), ' ');
 
     std::vector<std::string> store;
     std::vector<std::string> values;
@@ -226,7 +199,10 @@ private:
     return result;
   }
 
-  mp_RPN shunting_yard(const mp_SepValues sep){
+  mp_RPN compile(const std::string infix){
+
+    mp_SepValues sep = seperate(infix);
+
     std::stack<Token> stack;
     std::vector<Token> queue;
 
@@ -298,16 +274,14 @@ private:
     }
 
     mp_RPN result;
+
     result.infix = sep.infix;
     result.infixValues = sep.infixValues;
     result.RPNValues = fixedQueue;
     result.RPN = joiner;
 
     return result;
-
   }
-
-  std::map<std::string, mp_RPN> cachedRPN;
 
   std::map<std::string, double (*)(double, double)> multipleParameterFunction;
 
@@ -337,7 +311,6 @@ private:
   std::map<std::string, int> operatorAssociative = {
       {"^", 1}, {"*", 0}, {"/", 0}, {"+", 0}, {"-", 0}, {"%", 0}};
 
-  std::vector<std::string> cachedVariables;
   std::vector<std::string> externalVariables;
   std::vector<std::string> functions;
   std::vector<std::string> operators;
