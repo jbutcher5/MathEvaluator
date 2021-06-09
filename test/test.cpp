@@ -22,19 +22,21 @@ bool test(std::vector<std::string> input, std::vector<std::string> RPN, std::vec
     int rpn_score = 0;
     int evaluation_score = 0;
 
-    std::vector<mp_RPN> RPN_Values;
+    std::vector<double> RPN_Values;
 
     LOG("Convertion");
 
     for (int x = 0; x < (int)input.size(); x++){
-      mp_RPN u = parser.compile(input[x]);
-      if (u.RPN == RPN[x]){
+
+      double u = parser.eval(input[x]);
+
+      if (parser.rpn.RPN == RPN[x]){
         std::cout << input[x] << " -> " << RPN[x] << " | " << "Success" << std::endl;
         rpn_score++;
       }
 
       else{
-        std::cout << input[x] << " -> " << RPN[x] << " (" << u.RPN << ")" << " | " << "Failed" << std::endl;
+        std::cout << input[x] << " -> " << RPN[x] << " (" << parser.rpn.RPN << ")" << " | " << "Failed" << std::endl;
       }
 
       RPN_Values.push_back(u);
@@ -43,7 +45,7 @@ bool test(std::vector<std::string> input, std::vector<std::string> RPN, std::vec
     LOG("Evaluation");
 
     for (int x = 0; x < (int)input.size(); x++){
-      double evaluation = parser.eval(RPN_Values[x]);
+      double evaluation = RPN_Values[x];
 
       if (evaluation == result[x]){
         std::cout << input[x] << " -> " << result[x] << " | " << "Success" << std::endl;
