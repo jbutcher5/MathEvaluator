@@ -8,13 +8,11 @@ MathParser is quite a basic C++ header file that evaluates infix math expression
 ```c++
 double result = evaluate("1+1"); // returns 2
 ```
-
 ### Basic Eval (With MathParser Class)
 ```c++
 MathParser parser
-mp_RPN rpn = parser.compile("1+1");
 
-double result = parser.eval(rpn); // returns 2
+double result = parser.eval("1+1"); // returns 2
 ```
 ### External Variable Eval
 ```c++
@@ -24,9 +22,7 @@ double x = 20;
 
 parser.appendVariable("x", x);
 
-mp_RPN rpn = parser.compile("1+x");
-
-double result = parser.eval(rpn); // returns 21
+double result = parser.eval("1+x"); // returns 21
 ```
 ### Updating External Variable Eval
 ```c++
@@ -36,18 +32,14 @@ double x = 20;
 
 parser.appendVariable("x", x);
 
-mp_RPN rpn = parser.compile("1+x");
-
-double result1 = parser.eval(rpn); // returns 21
+double result1 = parser.eval("1+x"); // returns 21
 
 x = 10;
 
-double result2 = parser.eval(rpn); // returns 11
+double result2 = parser.eval("1+x"); // returns 11
 ```
 ### Functions Eval
 ```c++
 MathParser parser
-mp_RPN rpn = parser.compile("sin(1.5707963267948966)");
-
-double result = parser.eval(rpn); // returns 1
+double result = parser.eval("sin(1.5707963267948966)"); // returns 1
 ```
