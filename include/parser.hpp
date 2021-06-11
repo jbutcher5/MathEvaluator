@@ -113,7 +113,13 @@ public:
     return round(resultStack.top() * 10000) / 10000;
   }
 
-  mp_RPN rpn;
+  mp_RPN getRPN(){
+    return rpn;
+  }
+
+  std::map<std::string, double*> getExternalVariables(){
+    return externalVariablesMap;
+  }
 
 private:
 
@@ -282,6 +288,8 @@ private:
 
     return result;
   }
+
+  mp_RPN rpn;
 
   std::map<std::string, double (*)(double, double)> multipleParameterFunction;
 
