@@ -18,7 +18,7 @@ struct ll{
 };
 
 template <typename T>
-void appendItem(T data, ll<T>& list){
+void appendItem(const T data, ll<T>& list){
 
   Node<T>* new_node = new Node<T>;
   T* new_data = new T;
@@ -34,7 +34,7 @@ void appendItem(T data, ll<T>& list){
 }
 
 template <typename T>
-void removeItem(size_t index, ll<T>& list){
+void removeItem(const size_t index, ll<T>& list){
   // In-Case HEAD
 
   if (!index){
@@ -78,4 +78,23 @@ void removeItem(size_t index, ll<T>& list){
   delete curr->next;
 
   curr->next = to_link;
+}
+
+template <typename T>
+size_t getIndex(const T data, const ll<T> list){
+  Node<T>* curr = list.head;
+
+  size_t i = 0;
+
+  while (curr->next != NULL){
+    if (*(curr->data) == data) return i;
+
+    curr = curr->next;
+
+    i++;
+  }
+
+  if (*(list.tail->data) == data) return i++;
+
+  return NULL;
 }
