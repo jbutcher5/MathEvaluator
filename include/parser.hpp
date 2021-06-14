@@ -123,6 +123,7 @@ public:
 
 private:
 
+
   mp_SepValues seperate(std::string infix){
 
     std::vector<std::string> store;
@@ -319,7 +320,10 @@ private:
   std::map<std::string, int> operatorAssociative = {
       {"^", 1}, {"*", 0}, {"/", 0}, {"+", 0}, {"-", 0}, {"%", 0}};
 
+  //head_node<std::string> externalVariables;
+
   std::vector<std::string> externalVariables;
+
   std::vector<std::string> functions;
   std::vector<std::string> operators;
   std::vector<std::string> symbols = {"(", ")", ","};
