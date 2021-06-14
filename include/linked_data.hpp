@@ -110,6 +110,17 @@ size_t getIndex(const T data, const ll<T> list){
 }
 
 template <typename T>
+bool inList(const T data, const ll<T> list){
+  if(!listCheck<T>(list)) return false;
+
+  if (*(list.head->data) == data) return true;
+
+  if (getIndex<T>(data, list)) return true;
+
+  return false;
+}
+
+template <typename T>
 size_t getLength(ll<T>& list){
   if (!listCheck<T>(list)) return 0;
 
