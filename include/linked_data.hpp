@@ -100,6 +100,21 @@ size_t getIndex(const T data, const ll<T> list){
 }
 
 template <typename T>
+size_t getLength(ll<T>& list){
+  size_t total = 0;
+
+  Node<T>* curr = list.head;
+
+  while (curr->next == NULL){
+    total++;
+    curr = curr->next;
+  }
+
+  return total++;
+
+}
+
+template <typename T>
 void freeAll(ll<T>& list){
   Node<T>* curr = list.head;
 
