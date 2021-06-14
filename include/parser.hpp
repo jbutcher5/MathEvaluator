@@ -11,6 +11,8 @@
 #include <stack>
 #include <utility>
 
+#include "linked_data.hpp"
+
 struct Token{
   std::string value;
   std::string type;
@@ -42,12 +44,13 @@ public:
   void appendVariable(const std::string name, double &value){
     externalVariablesMap[name] = &value;
 
-    if (!inVector(name, externalVariables)) externalVariables.push_back(name);
+    if (!inList<std::string>(name, externalVariables)) appendItem<std::string>(name, externalVariables);
   }
 
   void deleteVariable(const std::string name){
     externalVariablesMap.erase(name);
-    removeItemInVector(name, externalVariables);
+
+    removeItem<std::string>(getIndex(name, externalVariables), externalVariables);
   }
 
   double eval(const std::string expr){
@@ -60,7 +63,7 @@ public:
 
       bool isOperator = token.type == "operator";
       bool isFunction = token.type == "function";
-      bool isVariable = inVector(token.value, externalVariables);
+      bool isVariable = inList(token.value, externalVariables);
       bool isOperand = !isOperator && !isFunction && !isVariable;
 
       if (isOperator){
@@ -322,7 +325,9 @@ private:
 
   //head_node<std::string> externalVariables;
 
-  std::vector<std::string> externalVariables;
+  //std::vector<std::string> externalVariables;
+  //
+  ll<std::string> externalVariables;
 
   std::vector<std::string> functions;
   std::vector<std::string> operators;
