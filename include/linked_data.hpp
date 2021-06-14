@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string>
 #include <iostream>
+#include <array>
 
 template <typename T>
 struct Node{
@@ -16,6 +17,11 @@ struct ll{
   Node<T>* head = NULL;
   Node<T>* tail = NULL;
 };
+
+template <typename T>
+bool listCheck(const ll<T>& list){
+  return (list.head != NULL) && (list.tail != NULL);
+}
 
 template <typename T>
 void appendItem(const T data, ll<T>& list){
@@ -35,6 +41,8 @@ void appendItem(const T data, ll<T>& list){
 
 template <typename T>
 void removeItem(const size_t index, ll<T>& list){
+  if (!listCheck<T>(list)) return;
+
   // In-Case HEAD
 
   if (!index){
@@ -82,6 +90,8 @@ void removeItem(const size_t index, ll<T>& list){
 
 template <typename T>
 size_t getIndex(const T data, const ll<T> list){
+  if (!listCheck<T>(list)) return 0;
+
   Node<T>* curr = list.head;
 
   size_t i = 0;
@@ -96,11 +106,13 @@ size_t getIndex(const T data, const ll<T> list){
 
   if (*(list.tail->data) == data) return i++;
 
-  return NULL;
+  return 0;
 }
 
 template <typename T>
 size_t getLength(ll<T>& list){
+  if (!listCheck<T>(list)) return 0;
+
   size_t total = 0;
 
   Node<T>* curr = list.head;
@@ -116,6 +128,8 @@ size_t getLength(ll<T>& list){
 
 template <typename T>
 void freeAll(ll<T>& list){
+  if (!listCheck<T>(list)) return;
+
   Node<T>* curr = list.head;
 
   while (curr->next != NULL){
@@ -128,4 +142,14 @@ void freeAll(ll<T>& list){
 
   delete curr->data;
   delete curr;
+
+  list.head = NULL;
+  list.tail = NULL;
+}
+
+template <typename T, size_t S>
+void convertArr(const std::array<T,S> array, ll<T>& list){
+  for (int i = 0; i < array.size(); i++){
+    appendItem<T>(array[i], list);
+  }
 }
