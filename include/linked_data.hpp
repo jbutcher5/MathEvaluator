@@ -98,3 +98,19 @@ size_t getIndex(const T data, const ll<T> list){
 
   return NULL;
 }
+
+template <typename T>
+void freeAll(ll<T>& list){
+  Node<T>* curr = list.head;
+
+  while (curr->next != NULL){
+    Node<T>* next = curr->next;
+    delete curr->data;
+    delete curr;
+
+    curr = next;
+  }
+
+  delete curr->data;
+  delete curr;
+}
