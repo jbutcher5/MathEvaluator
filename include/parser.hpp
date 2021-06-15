@@ -44,13 +44,13 @@ public:
   void appendVariable(const std::string name, double &value){
     externalVariablesMap[name] = &value;
 
-    if (!inList<std::string>(name, externalVariables)) appendItem<std::string>(name, externalVariables);
+    if (!externalVariables.inList(name)) externalVariables.appendItem(name);
   }
 
   void deleteVariable(const std::string name){
     externalVariablesMap.erase(name);
 
-    removeItem<std::string>(getIndex(name, externalVariables), externalVariables);
+    externalVariables.removeItem(externalVariables.getIndex(name));
   }
 
   double eval(const std::string expr){
@@ -63,7 +63,7 @@ public:
 
       bool isOperator = token.type == "operator";
       bool isFunction = token.type == "function";
-      bool isVariable = inList(token.value, externalVariables);
+      bool isVariable = externalVariables.inList(token.value);
       bool isOperand = !isOperator && !isFunction && !isVariable;
 
       if (isOperator){
