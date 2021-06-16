@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string>
 #include <iostream>
-#include <vector>
+#include <array>
 
 template <typename T>
 struct Node{
@@ -13,28 +13,18 @@ struct Node{
 };
 
 template <typename T>
-class ll{
-public:
+struct ll{
   Node<T>* head = NULL;
   Node<T>* tail = NULL;
-
-  bool listCheck();
-  void appendItem(const T);
-  void removeItem(const size_t);
-  size_t getIndex(const T);
-  bool inList(const T);
-  size_t getLength();
-  void freeAll();
-  void convertVec(const std::vector<T>);
 };
 
 template <typename T>
-bool ll<T>::listCheck(){
-  return (head != NULL) && (tail != NULL);
+bool listCheck(const ll<T>& list){
+  return (list.head != NULL) && (list.tail != NULL);
 }
 
 template <typename T>
-void ll<T>::appendItem(const T data){
+void appendItem(const T data, ll<T>& list){
 
   Node<T>* new_node = new Node<T>;
   T* new_data = new T;
@@ -43,30 +33,30 @@ void ll<T>::appendItem(const T data){
 
   new_node->data = new_data;
 
-  if (head == NULL) head = new_node;
-  if (tail != NULL) tail->next = new_node;
+  if (list.head == NULL) list.head = new_node;
+  if (list.tail != NULL) list.tail->next = new_node;
 
-  tail = new_node;
+  list.tail = new_node;
 }
 
 template <typename T>
-void ll<T>::removeItem(const size_t index){
-  if (!listCheck()) return;
+void removeItem(const size_t index, ll<T>& list){
+  if (!listCheck<T>(list)) return;
 
   // In-Case HEAD
 
   if (!index){
-    Node<T>* to_link = head->next;
+    Node<T>* to_link = list.head->next;
 
-    delete head->data;
-    delete head;
+    delete list.head->data;
+    delete list.head;
 
-    head = to_link;
+    list.head = to_link;
 
     return;
   }
 
-  Node<T>* curr = head;
+  Node<T>* curr = list.head;
 
   size_t i = 0;
 
@@ -86,7 +76,7 @@ void ll<T>::removeItem(const size_t index){
     delete curr->next->data;
     delete curr->next;
     curr->next = NULL;
-    tail = curr;
+    list.tail = curr;
     return;
   }
 
@@ -99,10 +89,10 @@ void ll<T>::removeItem(const size_t index){
 }
 
 template <typename T>
-size_t ll<T>::getIndex(const T data){
-  if (!listCheck()) return 0;
+size_t getIndex(const T data, const ll<T> list){
+  if (!listCheck<T>(list)) return 0;
 
-  Node<T>* curr = head;
+  Node<T>* curr = list.head;
 
   size_t i = 0;
 
@@ -114,29 +104,29 @@ size_t ll<T>::getIndex(const T data){
     i++;
   }
 
-  if (*(tail->data) == data) return i++;
+  if (*(list.tail->data) == data) return i++;
 
   return 0;
 }
 
 template <typename T>
-bool ll<T>::inList(const T data){
-  if(!listCheck()) return false;
+bool inList(const T data, const ll<T> list){
+  if(!listCheck<T>(list)) return false;
 
-  if (*(head->data) == data) return true;
+  if (*(list.head->data) == data) return true;
 
-  if (getIndex(data)) return true;
+  if (getIndex<T>(data, list)) return true;
 
   return false;
 }
 
 template <typename T>
-size_t ll<T>::getLength(){
-  if (!listCheck()) return 0;
+size_t getLength(ll<T>& list){
+  if (!listCheck<T>(list)) return 0;
 
   size_t total = 0;
 
-  Node<T>* curr = head;
+  Node<T>* curr = list.head;
 
   while (curr->next == NULL){
     total++;
@@ -148,10 +138,10 @@ size_t ll<T>::getLength(){
 }
 
 template <typename T>
-void ll<T>::freeAll(){
-  if (!listCheck()) return;
+void freeAll(ll<T>& list){
+  if (!listCheck<T>(list)) return;
 
-  Node<T>* curr = head;
+  Node<T>* curr = list.head;
 
   while (curr->next != NULL){
     Node<T>* next = curr->next;
@@ -164,13 +154,13 @@ void ll<T>::freeAll(){
   delete curr->data;
   delete curr;
 
-  head = NULL;
-  tail = NULL;
+  list.head = NULL;
+  list.tail = NULL;
 }
 
-template <typename T>
-void ll<T>::convertVec(const std::vector<T> array){
+template <typename T, size_t S>
+void convertArr(const std::array<T,S> array, ll<T>& list){
   for (int i = 0; i < array.size(); i++){
-    appendItem(array[i]);
+    appendItem<T>(array[i], list);
   }
 }
