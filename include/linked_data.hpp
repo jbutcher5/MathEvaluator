@@ -54,6 +54,9 @@ public:
   }
 
   Node<T>* getNode(const size_t index){
+
+    const size_t fixed_index = index % size();
+
     Node<T>* curr = head;
 
     size_t i = 0;
