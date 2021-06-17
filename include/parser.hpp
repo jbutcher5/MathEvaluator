@@ -338,10 +338,6 @@ private:
   std::map<std::string, int> operatorAssociative = {
       {"^", 1}, {"*", 0}, {"/", 0}, {"+", 0}, {"-", 0}, {"%", 0}};
 
-  //head_node<std::string> externalVariables;
-
-  //std::vector<std::string> externalVariables;
-  //
   mp_List<std::string> externalVariables;
 
   std::vector<std::string> functions;
