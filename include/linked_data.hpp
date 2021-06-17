@@ -4,17 +4,12 @@
 #include <stdlib.h>
 #include <string>
 #include <iostream>
+#include <vector>
 
 template <typename T>
 struct Node{
   T* data;
   Node<T>* next = NULL;
-};
-
-template <typename T>
-struct ll{
-  Node<T>* head = NULL;
-  Node<T>* tail = NULL;
 };
 
 template <typename T>
@@ -130,4 +125,19 @@ public:
       remove(0);
     }
   }
+
+  void appendVec(const std::vector<T> vec){
+    for (T i : vec) append(i);
+  }
+
+  bool inList(const T data){
+    for (int i = 0; i < size(); i++){
+      if (getData(i) == data){
+        return true;
+      }
+    }
+
+    return false;
+  }
+
 };
