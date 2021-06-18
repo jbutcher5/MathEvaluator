@@ -55,11 +55,11 @@ public:
 
   Node<T>* getNode(const size_t index){
 
-    const size_t fixed_index = index % size();
-
     Node<T>* curr = head;
 
     size_t i = 0;
+
+    if (index == size()-1) return tail;
 
     while (curr->next != NULL){
       if (i == index) return curr;
@@ -67,7 +67,7 @@ public:
       i++;
     }
 
-    return tail;
+    return NULL;
   }
 
   T getData(const size_t index){
@@ -131,6 +131,14 @@ public:
 
   void appendVec(const std::vector<T> vec){
     for (T i : vec) append(i);
+  }
+
+  std::vector<T> exposeVec(){
+    std::vector<T> ret;
+    for (int i = 0; i < size(); i++){
+      ret.push_back(getData(i));
+    }
+    return ret;
   }
 
   bool inList(const T data){
