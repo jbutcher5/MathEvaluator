@@ -2,6 +2,7 @@
 
 #include <array>
 #include <cmath>
+#include <cstddef>
 #include <iterator>
 #include <map>
 #include <sstream>
@@ -35,6 +36,20 @@ inline float _mul(double x, double y) { return (float)(x*y); }
 inline float _div(double x, double y) { return (float)(x/y); }
 inline float _sub(double x, double y) { return (float)(x-y); }
 
+template <typename T>
+class mp_List : public list<T>{
+public:
+  size_t getIndex(const T data){
+    for (int i = 0; i < this->size(); i++){
+      if (this->getData(i) == data){
+        return i;
+      }
+    }
+
+    return 0;
+  }
+};
+
 class MathParser{
 public:
   MathParser(){
@@ -44,13 +59,13 @@ public:
   void appendVariable(const std::string name, double &value){
     externalVariablesMap[name] = &value;
 
-    if (!externalVariables.inList(name)) externalVariables.appendItem(name);
+    if (!externalVariables.inList(name)) externalVariables.append(name);
   }
 
   void deleteVariable(const std::string name){
     externalVariablesMap.erase(name);
 
-    externalVariables.removeItem(externalVariables.getIndex(name));
+    externalVariables.remove(externalVariables.getIndex(name));
   }
 
   double eval(const std::string expr){
@@ -323,11 +338,7 @@ private:
   std::map<std::string, int> operatorAssociative = {
       {"^", 1}, {"*", 0}, {"/", 0}, {"+", 0}, {"-", 0}, {"%", 0}};
 
-  //head_node<std::string> externalVariables;
-
-  //std::vector<std::string> externalVariables;
-  //
-  ll<std::string> externalVariables;
+  mp_List<std::string> externalVariables;
 
   std::vector<std::string> functions;
   std::vector<std::string> operators;

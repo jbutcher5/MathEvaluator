@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string>
 #include <iostream>
-#include <array>
+#include <vector>
 
 template <typename T>
 struct Node{
@@ -13,154 +13,142 @@ struct Node{
 };
 
 template <typename T>
-struct ll{
+class list{
+private:
+  bool listCheck(){
+    return (head != NULL) && (tail != NULL);
+  }
+public:
   Node<T>* head = NULL;
   Node<T>* tail = NULL;
-};
 
-template <typename T>
-bool listCheck(const ll<T>& list){
-  return (list.head != NULL) && (list.tail != NULL);
-}
+  void append(const T data){
+    Node<T>* new_node = new Node<T>;
+    T* new_data = new T;
 
-template <typename T>
-void appendItem(const T data, ll<T>& list){
+    *new_data = data;
 
-  Node<T>* new_node = new Node<T>;
-  T* new_data = new T;
+    new_node->data = new_data;
 
-  *new_data = data;
+    if (head == NULL) head = new_node;
+    if (tail != NULL) tail->next = new_node;
 
-  new_node->data = new_data;
-
-  if (list.head == NULL) list.head = new_node;
-  if (list.tail != NULL) list.tail->next = new_node;
-
-  list.tail = new_node;
-}
-
-template <typename T>
-void removeItem(const size_t index, ll<T>& list){
-  if (!listCheck<T>(list)) return;
-
-  // In-Case HEAD
-
-  if (!index){
-    Node<T>* to_link = list.head->next;
-
-    delete list.head->data;
-    delete list.head;
-
-    list.head = to_link;
-
-    return;
+    tail = new_node;
   }
 
-  Node<T>* curr = list.head;
+  size_t size(){
+    if (!listCheck()) return 0;
 
-  size_t i = 0;
+    Node<T>* curr = head;
 
-  while (i != index-1) {
-    if (curr->next == NULL && i != index){
+    size_t size = 0;
+
+    while (curr->next != NULL){
+      size++;
+      curr = curr->next;
+    }
+
+    size++;
+
+    return size;
+  }
+
+  Node<T>* getNode(const size_t index){
+
+    Node<T>* curr = head;
+
+    size_t i = 0;
+
+    if (index == size()-1) return tail;
+
+    while (curr->next != NULL){
+      if (i == index) return curr;
+      curr = curr->next;
+      i++;
+    }
+
+    return NULL;
+  }
+
+  T getData(const size_t index){
+    return *(getNode(index)->data);
+  }
+
+  void remove(const size_t index){
+    if (!listCheck()) return;
+
+    // In-Case HEAD
+
+    if (!index){
+      Node<T>* to_link = head->next;
+
+      delete head->data;
+      delete head;
+
+      head = to_link;
+
       return;
     }
 
-    curr = curr->next;
+    Node<T>* curr = head;
 
-    i++;
-  }
+    size_t i = 0;
 
-  // In-Case TAIL
+    while (i != index-1) {
+      if (curr->next == NULL && i != index){
+        return;
+      }
 
-  if (curr->next->next == NULL){
+      curr = curr->next;
+
+      i++;
+    }
+
+    // In-Case TAIL
+
+    if (curr->next->next == NULL){
+      delete curr->next->data;
+      delete curr->next;
+      curr->next = NULL;
+      tail = curr;
+      return;
+    }
+
+    Node<T>* to_link = curr->next->next;
+
     delete curr->next->data;
     delete curr->next;
-    curr->next = NULL;
-    list.tail = curr;
-    return;
+
+    curr->next = to_link;
+
   }
 
-  Node<T>* to_link = curr->next->next;
-
-  delete curr->next->data;
-  delete curr->next;
-
-  curr->next = to_link;
-}
-
-template <typename T>
-size_t getIndex(const T data, const ll<T> list){
-  if (!listCheck<T>(list)) return 0;
-
-  Node<T>* curr = list.head;
-
-  size_t i = 0;
-
-  while (curr->next != NULL){
-    if (*(curr->data) == data) return i;
-
-    curr = curr->next;
-
-    i++;
+  void freeAll(){
+    while (size() > 0){
+      remove(0);
+    }
   }
 
-  if (*(list.tail->data) == data) return i++;
-
-  return 0;
-}
-
-template <typename T>
-bool inList(const T data, const ll<T> list){
-  if(!listCheck<T>(list)) return false;
-
-  if (*(list.head->data) == data) return true;
-
-  if (getIndex<T>(data, list)) return true;
-
-  return false;
-}
-
-template <typename T>
-size_t getLength(ll<T>& list){
-  if (!listCheck<T>(list)) return 0;
-
-  size_t total = 0;
-
-  Node<T>* curr = list.head;
-
-  while (curr->next == NULL){
-    total++;
-    curr = curr->next;
+  void appendVec(const std::vector<T> vec){
+    for (T i : vec) append(i);
   }
 
-  return total++;
-
-}
-
-template <typename T>
-void freeAll(ll<T>& list){
-  if (!listCheck<T>(list)) return;
-
-  Node<T>* curr = list.head;
-
-  while (curr->next != NULL){
-    Node<T>* next = curr->next;
-    delete curr->data;
-    delete curr;
-
-    curr = next;
+  std::vector<T> exposeVec(){
+    std::vector<T> ret;
+    for (int i = 0; i < size(); i++){
+      ret.push_back(getData(i));
+    }
+    return ret;
   }
 
-  delete curr->data;
-  delete curr;
+  bool inList(const T data){
+    for (int i = 0; i < size(); i++){
+      if (getData(i) == data){
+        return true;
+      }
+    }
 
-  list.head = NULL;
-  list.tail = NULL;
-}
-
-template <typename T, size_t S>
-void convertArr(const std::array<T,S> array, ll<T>& list){
-  for (int i = 0; i < array.size(); i++){
-    appendItem<T>(array[i], list);
+    return false;
   }
-}
+
+};
