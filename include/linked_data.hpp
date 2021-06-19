@@ -18,6 +18,7 @@ private:
   bool listCheck(){
     return (head != NULL) && (tail != NULL);
   }
+
 public:
   Node<T>* head = NULL;
   Node<T>* tail = NULL;
@@ -31,7 +32,8 @@ public:
     new_node->data = new_data;
 
     if (head == NULL) head = new_node;
-    if (tail != NULL) tail->next = new_node;
+    if (tail != NULL)
+      tail->next = new_node;
 
     tail = new_node;
   }
@@ -127,6 +129,9 @@ public:
     while (size() > 0){
       remove(0);
     }
+
+    head = NULL;
+    tail = NULL;
   }
 
   void appendVec(const std::vector<T> vec){
@@ -150,5 +155,16 @@ public:
 
     return false;
   }
+
+  size_t getIndex(const T data){
+    for (int i = 0; i < size(); i++){
+      if (getData(i) == data){
+        return i;
+      }
+    }
+
+    return 0;
+  }
+
 
 };
