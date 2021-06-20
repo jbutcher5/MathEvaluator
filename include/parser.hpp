@@ -12,7 +12,7 @@
 #include <stack>
 #include <utility>
 
-#include "linked_data.hpp"
+#include "list.hpp"
 
 struct Token{
   std::string value;
@@ -141,11 +141,10 @@ public:
 
 private:
 
-
   mp_SepValues seperate(std::string infix){
 
-    std::vector<std::string> store;
-    std::vector<std::string> values;
+    list<std::string> store;
+    list<std::string> values;
 
     std::string joiner;
 
@@ -158,7 +157,7 @@ private:
       bool isSymbol = inVector(item, symbols);
 
       if (!isOperator && !isSymbol){
-        store.push_back(item);
+        store.append(item); // End head and tail of values are unsynced here
       }
 
       if (isOperator || isSymbol){
@@ -166,31 +165,34 @@ private:
         bool lastNumOperator = false;
 
         if (values.size() > 0){
-          if (inVector(values.back(), operators)) lastNumOperator = true;
+          if (inVector(values.getData(values.size()-1), operators)) lastNumOperator = true;
         }
 
         if ((int)store.size() > 0 && lastNumOperator) lastNumOperator = false;
 
         if (item == "-" && ((i == 0) || (lastNumOperator))){
-          store.push_back(item);
+          store.append(item);
         }
 
         else{
           joiner = "";
-          for (auto const& j : store) joiner += j;
-          store.clear();
-          values.push_back(joiner);
-          values.push_back(item);
+          for (auto const j : store.exposeVec()) joiner += j;
+          store.freeAll();
+          values.append(joiner);
+          values.append(item);
         }
       }
+
+
+
     }
 
     // Dump Store
 
     if (store.size() > 0){
       joiner = "";
-      for (auto const& j : store) joiner += j;
-      values.push_back(joiner);
+      for (auto const j : store.exposeVec()) joiner += j;
+      values.append(joiner); // ISSUE OCCURS HERE.
     }
 
     mp_SepValues result;
@@ -200,8 +202,7 @@ private:
 
     std::vector<Token> typedValues;
 
-    for (auto const& i : values){
-
+    for (auto const i : values.exposeVec()){
       std::string type;
 
       bool isOperator = inVector(i, operators);
