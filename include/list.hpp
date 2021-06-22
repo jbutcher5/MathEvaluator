@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <string>
 #include <iostream>
-#include <vector>
 
 template <typename T>
 class list{
@@ -131,18 +130,6 @@ public:
 
     head = NULL;
     tail = NULL;
-  }
-
-  void appendVec(const std::vector<T> vec){
-    for (T i : vec) append(i);
-  }
-
-  std::vector<T> exposeVec(){
-    std::vector<T> ret;
-    for (int i = 0; i < size(); i++){
-      ret.push_back(getData(i));
-    }
-    return ret;
   }
 
   template<size_t K>
