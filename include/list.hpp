@@ -145,6 +145,11 @@ public:
     return ret;
   }
 
+  template<size_t K>
+  void appendArr(const T arr[K]){
+    for (int i = 0; i < K; i++) append(arr[i]);
+  }
+
   bool inList(const T data){
     for (int i = 0; i < size(); i++){
       if (getData(i) == data){
