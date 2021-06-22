@@ -2,6 +2,7 @@
 
 #include <array>
 #include <cmath>
+#include <cstddef>
 #include <iterator>
 #include <map>
 #include <sstream>
@@ -11,7 +12,7 @@
 #include <stack>
 #include <utility>
 
-#include "linked_data.hpp"
+#include "list.hpp"
 
 struct Token{
   std::string value;
@@ -35,6 +36,20 @@ inline float _mul(double x, double y) { return (float)(x*y); }
 inline float _div(double x, double y) { return (float)(x/y); }
 inline float _sub(double x, double y) { return (float)(x-y); }
 
+template <typename T>
+class mp_List : public list<T>{
+public:
+  size_t getIndex(const T data){
+    for (int i = 0; i < this->size(); i++){
+      if (this->getData(i) == data){
+        return i;
+      }
+    }
+
+    return 0;
+  }
+};
+
 class MathParser{
 public:
   MathParser(){
@@ -44,13 +59,13 @@ public:
   void appendVariable(const std::string name, double &value){
     externalVariablesMap[name] = &value;
 
-    if (!externalVariables.inList(name)) externalVariables.appendItem(name);
+    if (!externalVariables.inList(name)) externalVariables.append(name);
   }
 
   void deleteVariable(const std::string name){
     externalVariablesMap.erase(name);
 
-    externalVariables.removeItem(externalVariables.getIndex(name));
+    externalVariables.remove(externalVariables.getIndex(name));
   }
 
   double eval(const std::string expr){
@@ -126,11 +141,10 @@ public:
 
 private:
 
-
   mp_SepValues seperate(std::string infix){
 
-    std::vector<std::string> store;
-    std::vector<std::string> values;
+    list<std::string> store;
+    list<std::string> values;
 
     std::string joiner;
 
@@ -143,7 +157,7 @@ private:
       bool isSymbol = inVector(item, symbols);
 
       if (!isOperator && !isSymbol){
-        store.push_back(item);
+        store.append(item); // End head and tail of values are unsynced here
       }
 
       if (isOperator || isSymbol){
@@ -151,31 +165,34 @@ private:
         bool lastNumOperator = false;
 
         if (values.size() > 0){
-          if (inVector(values.back(), operators)) lastNumOperator = true;
+          if (inVector(values.getData(values.size()-1), operators)) lastNumOperator = true;
         }
 
         if ((int)store.size() > 0 && lastNumOperator) lastNumOperator = false;
 
         if (item == "-" && ((i == 0) || (lastNumOperator))){
-          store.push_back(item);
+          store.append(item);
         }
 
         else{
           joiner = "";
-          for (auto const& j : store) joiner += j;
-          store.clear();
-          values.push_back(joiner);
-          values.push_back(item);
+          for (auto const j : store.exposeVec()) joiner += j;
+          store.freeAll();
+          values.append(joiner);
+          values.append(item);
         }
       }
+
+
+
     }
 
     // Dump Store
 
     if (store.size() > 0){
       joiner = "";
-      for (auto const& j : store) joiner += j;
-      values.push_back(joiner);
+      for (auto const j : store.exposeVec()) joiner += j;
+      values.append(joiner); // ISSUE OCCURS HERE.
     }
 
     mp_SepValues result;
@@ -185,8 +202,7 @@ private:
 
     std::vector<Token> typedValues;
 
-    for (auto const& i : values){
-
+    for (auto const i : values.exposeVec()){
       std::string type;
 
       bool isOperator = inVector(i, operators);
@@ -323,11 +339,7 @@ private:
   std::map<std::string, int> operatorAssociative = {
       {"^", 1}, {"*", 0}, {"/", 0}, {"+", 0}, {"-", 0}, {"%", 0}};
 
-  //head_node<std::string> externalVariables;
-
-  //std::vector<std::string> externalVariables;
-  //
-  ll<std::string> externalVariables;
+  mp_List<std::string> externalVariables;
 
   std::vector<std::string> functions;
   std::vector<std::string> operators;
