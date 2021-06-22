@@ -154,8 +154,8 @@ private:
 
       // Deduce Type
 
-      bool isOperator = inVector(item, operators);
-      bool isSymbol = inVector(item, symbols);
+      bool isOperator = operators.inList(item);
+      bool isSymbol = symbols.inList(item);
 
       if (!isOperator && !isSymbol){
         store.append(item); // End head and tail of values are unsynced here
@@ -166,7 +166,7 @@ private:
         bool lastNumOperator = false;
 
         if (values.size() > 0){
-          if (inVector(values.getData(values.size()-1), operators)) lastNumOperator = true;
+          if (operators.inList(values.getData(values.size()-1))) lastNumOperator = true;
         }
 
         if ((int)store.size() > 0 && lastNumOperator) lastNumOperator = false;
@@ -206,9 +206,9 @@ private:
     for (auto const i : values.exposeVec()){
       std::string type;
 
-      bool isOperator = inVector(i, operators);
-      bool isFunction = !isOperator && inVector(i, functions);
-      bool isSymbol = !isOperator && !isFunction && inVector(i, symbols);
+      bool isOperator = operators.inList(i);
+      bool isFunction = !isOperator && functions.inList(i);
+      bool isSymbol = !isOperator && !isFunction && symbols.inList(i);
       bool isOperand = !isOperator && !isFunction && !isSymbol;
 
       if (isOperator) type = "operator";
@@ -280,7 +280,7 @@ private:
         }
 
         if (stack.size() > 0){
-          if (inVector(stack.top().value, functions)){
+          if (functions.inList(stack.top().value)){
             queue.append(stack.top());
             stack.pop();
           }
@@ -344,23 +344,15 @@ private:
 
   mp_List<std::string> externalVariables;
 
-  std::vector<std::string> functions;
-  std::vector<std::string> operators;
-  std::vector<std::string> symbols = {"(", ")", ","};
+  list<std::string> functions;
+  list<std::string> operators;
+  list<std::string> symbols;
 
   void populateArrays(){
-    for (auto const &element : operatorMap) operators.push_back(element.first);
-    for (auto const &element : functionsMap) functions.push_back(element.first);
-  }
+    symbols.appendVec((std::vector<std::string>){"(", ")", ","});
 
-  bool inVector(const std::string item, const std::vector<std::string> v){
-
-    return std::find(v.begin(), v.end(), item) != std::end(v);
-
-  }
-
-  void removeItemInVector(const std::string item, std::vector<std::string> vector){
-    vector.erase(std::find(vector.begin(), vector.end(), item));
+    for (auto const &element : operatorMap) operators.append(element.first);
+    for (auto const &element : functionsMap) functions.append(element.first);
   }
 };
 
