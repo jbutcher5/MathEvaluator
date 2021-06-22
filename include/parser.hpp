@@ -20,13 +20,13 @@ struct Token{
 };
 
 struct mp_SepValues{
-  std::vector<Token> infixValues;
+  list<Token> infixValues;
   std::string infix;
 };
 
 struct mp_RPN : public mp_SepValues{
   std::string RPN;
-  std::vector<Token> RPNValues;
+  list<Token> RPNValues;
 };
 
 inline float _pow(double x, double y) { return (float)pow(x, y); }
@@ -74,7 +74,8 @@ public:
 
     std::stack<double> resultStack;
 
-    for (Token const& token : rpn.RPNValues){
+    for (size_t index = 0; index < rpn.RPNValues.size(); index++){
+      const Token token = rpn.RPNValues.getData(index);
 
       bool isOperator = token.type == "operator";
       bool isFunction = token.type == "function";
@@ -192,7 +193,7 @@ private:
     if (store.size() > 0){
       joiner = "";
       for (auto const j : store.exposeVec()) joiner += j;
-      values.append(joiner); // ISSUE OCCURS HERE.
+      values.append(joiner);
     }
 
     mp_SepValues result;
@@ -200,7 +201,7 @@ private:
 
     // Deduce Type From Tokens
 
-    std::vector<Token> typedValues;
+    list<Token> typedValues;
 
     for (auto const i : values.exposeVec()){
       std::string type;
@@ -217,7 +218,7 @@ private:
 
       Token item = {i, type};
 
-      typedValues.push_back(item);
+      typedValues.append(item);
     }
 
     result.infixValues = typedValues;
@@ -230,15 +231,16 @@ private:
     mp_SepValues sep = seperate(infix);
 
     std::stack<Token> stack;
-    std::vector<Token> queue;
+    list<Token> queue;
 
-    for (auto const& i : sep.infixValues){
+    for (size_t index = 0; index < sep.infixValues.size(); index++){
+      const auto i = sep.infixValues.getData(index);
       bool isOperator = i.type == "operator";
       bool isFunction = i.type == "function";
       bool isSymbol = i.type == "symbol";
 
       if (!isOperator && !isFunction && !isSymbol) {
-        queue.push_back(i);
+        queue.append(i);
       }
 
       else if (!isOperator && isFunction && !isSymbol) {
@@ -250,7 +252,7 @@ private:
           if(((stack.top().type == "operator") && (operatorPrecedence[stack.top().value] > operatorPrecedence[i.value]))
              || ((operatorPrecedence[stack.top().value] == operatorPrecedence[i.value]) && (operatorAssociative[stack.top().value] == 0) && (stack.top().value != "("))){
 
-            queue.push_back(stack.top());
+            queue.append(stack.top());
             stack.pop();
           }
 
@@ -269,7 +271,7 @@ private:
 
       else if (i.value == ")"){
         while ((stack.top().value != "(")){
-          queue.push_back(stack.top());
+          queue.append(stack.top());
           stack.pop();
         }
 
@@ -279,7 +281,7 @@ private:
 
         if (stack.size() > 0){
           if (inVector(stack.top().value, functions)){
-            queue.push_back(stack.top());
+            queue.append(stack.top());
             stack.pop();
           }
         }
@@ -287,16 +289,17 @@ private:
     }
 
     while (stack.size() > 0){
-      queue.push_back(stack.top());
+      queue.append(stack.top());
       stack.pop();
     }
 
     std::string joiner = "";
-    std::vector<Token> fixedQueue;
+    list<Token> fixedQueue;
 
-    for (auto const& i : queue){
+    for (size_t index = 0; index < queue.size(); index++){
+      const auto i = queue.getData(index);
       joiner += i.value;
-      if (i.value != "") fixedQueue.push_back(i);
+      if (i.value != "") fixedQueue.append(i);
     }
 
     mp_RPN result;
