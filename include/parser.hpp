@@ -1,16 +1,9 @@
 #pragma once
 
-#include <array>
 #include <cmath>
-#include <cstddef>
-#include <iterator>
 #include <map>
-#include <sstream>
 #include <string>
-#include <vector>
-#include <algorithm>
 #include <stack>
-#include <utility>
 
 #include "list.hpp"
 
@@ -177,22 +170,25 @@ private:
 
         else{
           joiner = "";
-          for (auto const j : store.exposeVec()) joiner += j;
+          for (size_t index = 0; index < store.size(); index++){
+            const auto j = store.getData(index);
+            joiner += j;
+          }
           store.freeAll();
           values.append(joiner);
           values.append(item);
         }
       }
-
-
-
     }
 
     // Dump Store
 
     if (store.size() > 0){
       joiner = "";
-      for (auto const j : store.exposeVec()) joiner += j;
+      for (size_t index = 0; index < store.size(); index++){
+        const auto j = store.getData(index);
+        joiner += j;
+      }
       values.append(joiner);
     }
 
@@ -203,7 +199,8 @@ private:
 
     list<Token> typedValues;
 
-    for (auto const i : values.exposeVec()){
+    for (size_t index = 0; index < values.size(); index++){
+      const auto i = values.getData(index);
       std::string type;
 
       bool isOperator = operators.inList(i);
@@ -349,7 +346,8 @@ private:
   list<std::string> symbols;
 
   void populateArrays(){
-    symbols.appendVec((std::vector<std::string>){"(", ")", ","});
+    std::string symArr[3] = {"(", ")", ","};
+    symbols.appendArr<3>(symArr);
 
     for (auto const &element : operatorMap) operators.append(element.first);
     for (auto const &element : functionsMap) functions.append(element.first);
