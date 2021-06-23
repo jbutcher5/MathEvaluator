@@ -1,16 +1,9 @@
 #pragma once
 
-#include <array>
 #include <cmath>
-#include <cstddef>
-#include <iterator>
 #include <map>
-#include <sstream>
 #include <string>
-#include <vector>
-#include <algorithm>
 #include <stack>
-#include <utility>
 
 #include "list.hpp"
 
@@ -20,13 +13,13 @@ struct Token{
 };
 
 struct mp_SepValues{
-  std::vector<Token> infixValues;
+  list<Token> infixValues;
   std::string infix;
 };
 
 struct mp_RPN : public mp_SepValues{
   std::string RPN;
-  std::vector<Token> RPNValues;
+  list<Token> RPNValues;
 };
 
 inline float _pow(double x, double y) { return (float)pow(x, y); }
@@ -74,7 +67,8 @@ public:
 
     std::stack<double> resultStack;
 
-    for (Token const& token : rpn.RPNValues){
+    for (size_t index = 0; index < rpn.RPNValues.size(); index++){
+      const Token token = rpn.RPNValues.getData(index);
 
       bool isOperator = token.type == "operator";
       bool isFunction = token.type == "function";
@@ -153,8 +147,8 @@ private:
 
       // Deduce Type
 
-      bool isOperator = inVector(item, operators);
-      bool isSymbol = inVector(item, symbols);
+      bool isOperator = operators.inList(item);
+      bool isSymbol = symbols.inList(item);
 
       if (!isOperator && !isSymbol){
         store.append(item); // End head and tail of values are unsynced here
@@ -165,7 +159,7 @@ private:
         bool lastNumOperator = false;
 
         if (values.size() > 0){
-          if (inVector(values.getData(values.size()-1), operators)) lastNumOperator = true;
+          if (operators.inList(values.getData(values.size()-1))) lastNumOperator = true;
         }
 
         if ((int)store.size() > 0 && lastNumOperator) lastNumOperator = false;
@@ -176,23 +170,26 @@ private:
 
         else{
           joiner = "";
-          for (auto const j : store.exposeVec()) joiner += j;
+          for (size_t index = 0; index < store.size(); index++){
+            const auto j = store.getData(index);
+            joiner += j;
+          }
           store.freeAll();
           values.append(joiner);
           values.append(item);
         }
       }
-
-
-
     }
 
     // Dump Store
 
     if (store.size() > 0){
       joiner = "";
-      for (auto const j : store.exposeVec()) joiner += j;
-      values.append(joiner); // ISSUE OCCURS HERE.
+      for (size_t index = 0; index < store.size(); index++){
+        const auto j = store.getData(index);
+        joiner += j;
+      }
+      values.append(joiner);
     }
 
     mp_SepValues result;
@@ -200,14 +197,15 @@ private:
 
     // Deduce Type From Tokens
 
-    std::vector<Token> typedValues;
+    list<Token> typedValues;
 
-    for (auto const i : values.exposeVec()){
+    for (size_t index = 0; index < values.size(); index++){
+      const auto i = values.getData(index);
       std::string type;
 
-      bool isOperator = inVector(i, operators);
-      bool isFunction = !isOperator && inVector(i, functions);
-      bool isSymbol = !isOperator && !isFunction && inVector(i, symbols);
+      bool isOperator = operators.inList(i);
+      bool isFunction = !isOperator && functions.inList(i);
+      bool isSymbol = !isOperator && !isFunction && symbols.inList(i);
       bool isOperand = !isOperator && !isFunction && !isSymbol;
 
       if (isOperator) type = "operator";
@@ -217,7 +215,7 @@ private:
 
       Token item = {i, type};
 
-      typedValues.push_back(item);
+      typedValues.append(item);
     }
 
     result.infixValues = typedValues;
@@ -230,15 +228,16 @@ private:
     mp_SepValues sep = seperate(infix);
 
     std::stack<Token> stack;
-    std::vector<Token> queue;
+    list<Token> queue;
 
-    for (auto const& i : sep.infixValues){
+    for (size_t index = 0; index < sep.infixValues.size(); index++){
+      const auto i = sep.infixValues.getData(index);
       bool isOperator = i.type == "operator";
       bool isFunction = i.type == "function";
       bool isSymbol = i.type == "symbol";
 
       if (!isOperator && !isFunction && !isSymbol) {
-        queue.push_back(i);
+        queue.append(i);
       }
 
       else if (!isOperator && isFunction && !isSymbol) {
@@ -250,7 +249,7 @@ private:
           if(((stack.top().type == "operator") && (operatorPrecedence[stack.top().value] > operatorPrecedence[i.value]))
              || ((operatorPrecedence[stack.top().value] == operatorPrecedence[i.value]) && (operatorAssociative[stack.top().value] == 0) && (stack.top().value != "("))){
 
-            queue.push_back(stack.top());
+            queue.append(stack.top());
             stack.pop();
           }
 
@@ -269,7 +268,7 @@ private:
 
       else if (i.value == ")"){
         while ((stack.top().value != "(")){
-          queue.push_back(stack.top());
+          queue.append(stack.top());
           stack.pop();
         }
 
@@ -278,8 +277,8 @@ private:
         }
 
         if (stack.size() > 0){
-          if (inVector(stack.top().value, functions)){
-            queue.push_back(stack.top());
+          if (functions.inList(stack.top().value)){
+            queue.append(stack.top());
             stack.pop();
           }
         }
@@ -287,16 +286,17 @@ private:
     }
 
     while (stack.size() > 0){
-      queue.push_back(stack.top());
+      queue.append(stack.top());
       stack.pop();
     }
 
     std::string joiner = "";
-    std::vector<Token> fixedQueue;
+    list<Token> fixedQueue;
 
-    for (auto const& i : queue){
+    for (size_t index = 0; index < queue.size(); index++){
+      const auto i = queue.getData(index);
       joiner += i.value;
-      if (i.value != "") fixedQueue.push_back(i);
+      if (i.value != "") fixedQueue.append(i);
     }
 
     mp_RPN result;
@@ -341,23 +341,16 @@ private:
 
   mp_List<std::string> externalVariables;
 
-  std::vector<std::string> functions;
-  std::vector<std::string> operators;
-  std::vector<std::string> symbols = {"(", ")", ","};
+  list<std::string> functions;
+  list<std::string> operators;
+  list<std::string> symbols;
 
   void populateArrays(){
-    for (auto const &element : operatorMap) operators.push_back(element.first);
-    for (auto const &element : functionsMap) functions.push_back(element.first);
-  }
+    std::string symArr[3] = {"(", ")", ","};
+    symbols.appendArr<3>(symArr);
 
-  bool inVector(const std::string item, const std::vector<std::string> v){
-
-    return std::find(v.begin(), v.end(), item) != std::end(v);
-
-  }
-
-  void removeItemInVector(const std::string item, std::vector<std::string> vector){
-    vector.erase(std::find(vector.begin(), vector.end(), item));
+    for (auto const &element : operatorMap) operators.append(element.first);
+    for (auto const &element : functionsMap) functions.append(element.first);
   }
 };
 

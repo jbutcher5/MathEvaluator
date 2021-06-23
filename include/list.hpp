@@ -1,11 +1,5 @@
 #pragma once
 
-#include <cstddef>
-#include <stdlib.h>
-#include <string>
-#include <iostream>
-#include <vector>
-
 template <typename T>
 class list{
 private:
@@ -133,16 +127,9 @@ public:
     tail = NULL;
   }
 
-  void appendVec(const std::vector<T> vec){
-    for (T i : vec) append(i);
-  }
-
-  std::vector<T> exposeVec(){
-    std::vector<T> ret;
-    for (int i = 0; i < size(); i++){
-      ret.push_back(getData(i));
-    }
-    return ret;
+  template<size_t K>
+  void appendArr(const T arr[K]){
+    for (int i = 0; i < K; i++) append(arr[i]);
   }
 
   bool inList(const T data){
