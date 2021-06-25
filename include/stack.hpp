@@ -32,7 +32,7 @@ public:
     T pop(){
         Node* to_delete = tail;
         T data = *(to_delete->data);
-
+        
         bool is_final = head==tail;
 
         if (!is_final) tail = to_delete->prev;
