@@ -43,9 +43,9 @@ public:
   }
 };
 
-class MathParser{
+class MathEvaluator{
 public:
-  MathParser(){
+  MathEvaluator(){
     populateArrays();
   }
 
