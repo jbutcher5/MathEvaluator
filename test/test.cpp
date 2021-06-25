@@ -31,12 +31,12 @@ bool test(std::vector<std::string> input, std::vector<std::string> RPN, std::vec
       double u = parser.eval(input[x]);
 
       if (parser.getRPN().RPN == RPN[x]){
-        std::cout << input[x] << " -> " << RPN[x] << " | " << "Success" << std::endl;
+        std::cout << input[x] << " -> " << RPN[x] << " | Success" << std::endl;
         rpn_score++;
       }
 
       else{
-        std::cout << input[x] << " -> " << RPN[x] << " (" << parser.getRPN().RPN << ")" << " | " << "Failed" << std::endl;
+        std::cout << input[x] << " -> " << RPN[x] << " (" << parser.getRPN().RPN << ") | Failed" << std::endl;
       }
 
       RPN_Values.push_back(u);
@@ -48,12 +48,12 @@ bool test(std::vector<std::string> input, std::vector<std::string> RPN, std::vec
       double evaluation = RPN_Values[x];
 
       if (evaluation == result[x]){
-        std::cout << input[x] << " -> " << result[x] << " | " << "Success" << std::endl;
+        std::cout << input[x] << " -> " << result[x] << " | Success" << std::endl;
         evaluation_score++;
       }
 
       else{
-        std::cout << input[x] << " -> " << result[x] << " (" << evaluation << ")" << " | " << "Failed" << std::endl;
+        std::cout << input[x] << " -> " << result[x] << " (" << evaluation << ") | Failed" << std::endl;
       }
     }
 
