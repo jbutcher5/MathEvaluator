@@ -12,12 +12,12 @@ struct Token{
   std::string type;
 };
 
-struct mp_SepValues{
+struct me_SepValues{
   list<Token> infixValues;
   std::string infix;
 };
 
-struct mp_RPN : public mp_SepValues{
+struct me_RPN : public me_SepValues{
   std::string RPN;
   list<Token> RPNValues;
 };
@@ -30,7 +30,7 @@ inline float _div(double x, double y) { return (float)(x/y); }
 inline float _sub(double x, double y) { return (float)(x-y); }
 
 template <typename T>
-class mp_List : public list<T>{
+class me_List : public list<T>{
 public:
   size_t getIndex(const T data){
     for (int i = 0; i < this->size(); i++){
@@ -43,9 +43,9 @@ public:
   }
 };
 
-class MathParser{
+class MathEvaluator{
 public:
-  MathParser(){
+  MathEvaluator(){
     populateArrays();
   }
 
@@ -122,7 +122,7 @@ public:
     return round(resultStack.peak() * 10000) / 10000;
   }
 
-  mp_RPN getRPN(){
+  me_RPN getRPN(){
     return rpn;
   }
 
@@ -132,7 +132,7 @@ public:
 
 private:
 
-  mp_SepValues seperate(std::string infix){
+  me_SepValues seperate(std::string infix){
 
     list<std::string> store;
     list<std::string> values;
@@ -189,7 +189,7 @@ private:
       values.append(joiner);
     }
 
-    mp_SepValues result;
+    me_SepValues result;
     result.infix = infix;
 
     // Deduce Type From Tokens
@@ -220,9 +220,9 @@ private:
     return result;
   }
 
-  mp_RPN compile(const std::string infix){
+  me_RPN compile(const std::string infix){
 
-    mp_SepValues sep = seperate(infix);
+    me_SepValues sep = seperate(infix);
 
     Stack<Token> stack;
     list<Token> queue;
@@ -292,7 +292,7 @@ private:
       if (i.value != "") fixedQueue.append(i);
     }
 
-    mp_RPN result;
+    me_RPN result;
 
     result.infix = sep.infix;
     result.infixValues = sep.infixValues;
@@ -302,7 +302,7 @@ private:
     return result;
   }
 
-  mp_RPN rpn;
+  me_RPN rpn;
 
   std::map<std::string, double (*)(double, double)> multipleParameterFunction;
 
@@ -332,7 +332,7 @@ private:
   std::map<std::string, int> operatorAssociative = {
       {"^", 1}, {"*", 0}, {"/", 0}, {"+", 0}, {"-", 0}, {"%", 0}};
 
-  mp_List<std::string> externalVariables;
+  me_List<std::string> externalVariables;
 
   list<std::string> functions;
   list<std::string> operators;
