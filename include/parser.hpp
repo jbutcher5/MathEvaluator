@@ -3,9 +3,9 @@
 #include <cmath>
 #include <map>
 #include <string>
-#include <stack>
 
 #include "list.hpp"
+#include "stack.hpp"
 
 struct Token{
   std::string value;
@@ -65,7 +65,7 @@ public:
 
     rpn = compile(expr);
 
-    std::stack<double> resultStack;
+    Stack<double> resultStack;
 
     for (size_t index = 0; index < rpn.RPNValues.size(); index++){
       const Token token = rpn.RPNValues.getData(index);
@@ -84,8 +84,7 @@ public:
         std::array<double, 2> values;
 
         for (int i = 0; i < operands; i++){
-          values[i] = resultStack.top();
-          resultStack.pop();
+          values[i] = resultStack.pop();
         }
 
         resultStack.push((double)operatorMap[token.value](values[1], values[0]));
@@ -101,8 +100,7 @@ public:
 
       if (isFunction){
         if (functionParameters[token.value] == 1){
-          double value = resultStack.top();
-          resultStack.pop();
+          double value = resultStack.pop();
           resultStack.push(functionsMap[token.value](value));
         }
 
@@ -110,8 +108,7 @@ public:
           std::array<double, 2> values;
 
           for (int i = 0; i < 2; i++){
-            values[i] = resultStack.top();
-            resultStack.pop();
+            values[i] = resultStack.pop();
           }
 
           resultStack.push(multipleParameterFunction[token.value](values[1], values[0]));
@@ -122,7 +119,7 @@ public:
 
     if ((int)resultStack.size() > 1 || (int)resultStack.size() < 1) return 0.0;
 
-    return round(resultStack.top() * 10000) / 10000;
+    return round(resultStack.peak() * 10000) / 10000;
   }
 
   mp_RPN getRPN(){
@@ -227,7 +224,7 @@ private:
 
     mp_SepValues sep = seperate(infix);
 
-    std::stack<Token> stack;
+    Stack<Token> stack;
     list<Token> queue;
 
     for (size_t index = 0; index < sep.infixValues.size(); index++){
@@ -246,11 +243,10 @@ private:
 
       else if (isOperator && !isFunction && !isSymbol) {
         while(stack.size() > 0){
-          if(((stack.top().type == "operator") && (operatorPrecedence[stack.top().value] > operatorPrecedence[i.value]))
-             || ((operatorPrecedence[stack.top().value] == operatorPrecedence[i.value]) && (operatorAssociative[stack.top().value] == 0) && (stack.top().value != "("))){
+          if(((stack.peak().type == "operator") && (operatorPrecedence[stack.peak().value] > operatorPrecedence[i.value]))
+             || ((operatorPrecedence[stack.peak().value] == operatorPrecedence[i.value]) && (operatorAssociative[stack.peak().value] == 0) && (stack.peak().value != "("))){
 
-            queue.append(stack.top());
-            stack.pop();
+            queue.append(stack.pop());
           }
 
           else{
@@ -267,27 +263,24 @@ private:
       }
 
       else if (i.value == ")"){
-        while ((stack.top().value != "(")){
-          queue.append(stack.top());
-          stack.pop();
+        while ((stack.peak().value != "(")){
+          queue.append(stack.pop());
         }
 
-        if (stack.top().value == "("){
+        if (stack.peak().value == "("){
           stack.pop();
         }
 
         if (stack.size() > 0){
-          if (functions.inList(stack.top().value)){
-            queue.append(stack.top());
-            stack.pop();
+          if (functions.inList(stack.peak().value)){
+            queue.append(stack.pop());
           }
         }
       }
     }
 
     while (stack.size() > 0){
-      queue.append(stack.top());
-      stack.pop();
+      queue.append(stack.pop());
     }
 
     std::string joiner = "";
