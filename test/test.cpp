@@ -15,7 +15,7 @@ bool test(std::vector<std::string> input, std::vector<std::string> RPN, std::vec
   else {
     double x = 10;
 
-    MathParser parser;
+    MathEvaluator parser;
 
     parser.appendVariable("x", x);
 
