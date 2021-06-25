@@ -348,6 +348,6 @@ private:
 };
 
 double evaluate(const std::string infix){
-  MathParser parser;
-  return parser.eval(infix);
+  MathEvaluator evaluator;
+  return evaluator.eval(infix);
 }
