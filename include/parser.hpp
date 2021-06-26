@@ -7,9 +7,13 @@
 #include "list.hpp"
 #include "stack.hpp"
 
+enum token_type{ OPERATOR, OPERAND, SYMBOL, FUNCTION };
+
+
+
 struct Token{
   std::string value;
-  std::string type;
+  token_type type;
 };
 
 struct me_SepValues{
@@ -70,8 +74,8 @@ public:
     for (size_t index = 0; index < rpn.RPNValues.size(); index++){
       const Token token = rpn.RPNValues.getData(index);
 
-      bool isOperator = token.type == "operator";
-      bool isFunction = token.type == "function";
+      bool isOperator = token.type == OPERATOR;
+      bool isFunction = token.type == FUNCTION;
       bool isVariable = externalVariables.inList(token.value);
       bool isOperand = !isOperator && !isFunction && !isVariable;
 
@@ -198,17 +202,17 @@ private:
 
     for (size_t index = 0; index < values.size(); index++){
       const auto i = values.getData(index);
-      std::string type;
+      token_type type;
 
       bool isOperator = operators.inList(i);
       bool isFunction = !isOperator && functions.inList(i);
       bool isSymbol = !isOperator && !isFunction && symbols.inList(i);
       bool isOperand = !isOperator && !isFunction && !isSymbol;
 
-      if (isOperator) type = "operator";
-      if (isFunction) type = "function";
-      if (isSymbol) type = "symbol";
-      if (isOperand) type = "operand";
+      if (isOperator) type = OPERATOR;
+      if (isFunction) type = FUNCTION;
+      if (isSymbol) type = SYMBOL;
+      if (isOperand) type = OPERAND;
 
       Token item = {i, type};
 
@@ -229,9 +233,9 @@ private:
 
     for (size_t index = 0; index < sep.infixValues.size(); index++){
       const auto i = sep.infixValues.getData(index);
-      bool isOperator = i.type == "operator";
-      bool isFunction = i.type == "function";
-      bool isSymbol = i.type == "symbol";
+      bool isOperator = i.type == OPERATOR;
+      bool isFunction = i.type == FUNCTION;
+      bool isSymbol = i.type == SYMBOL;
 
       if (!isOperator && !isFunction && !isSymbol) {
         queue.append(i);
@@ -243,7 +247,7 @@ private:
 
       else if (isOperator && !isFunction && !isSymbol) {
         while(stack.size() > 0){
-          if(((stack.peak().type == "operator") && (operatorPrecedence[stack.peak().value] > operatorPrecedence[i.value]))
+          if(((stack.peak().type == OPERATOR) && (operatorPrecedence[stack.peak().value] > operatorPrecedence[i.value]))
              || ((operatorPrecedence[stack.peak().value] == operatorPrecedence[i.value]) && (operatorAssociative[stack.peak().value] == 0) && (stack.peak().value != "("))){
 
             queue.append(stack.pop());
