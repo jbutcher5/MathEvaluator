@@ -35,7 +35,7 @@ void Stack<T>::push(T data){
 }
 
 template <class T>
-T pop(){
+T Stack<T>::pop(){
   Node* to_delete = tail;
   T data = *(to_delete->data);
 
@@ -51,16 +51,16 @@ T pop(){
     tail = NULL;
   }
   
-  return data;:w
+  return data;
 }
 
 template <class T>
-T peak(){
+T Stack<T>::peak(){
   return *(tail->data);
 }
 
 template <class T>
-size_t size(){
+size_t Stack<T>::size(){
 
   if (head == NULL) return 0;
 
