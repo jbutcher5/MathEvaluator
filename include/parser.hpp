@@ -9,8 +9,6 @@
 
 enum token_type{ OPERATOR, OPERAND, SYMBOL, FUNCTION };
 
-
-
 struct Token{
   std::string value;
   token_type type;
@@ -344,7 +342,7 @@ private:
 
   void populateArrays(){
     std::string symArr[3] = {"(", ")", ","};
-    symbols.appendArr<3>(symArr);
+    for (int i = 0; i < 3; i++) symbols.append(symArr[i]);
 
     for (auto const &element : operatorMap) operators.append(element.first);
     for (auto const &element : functionsMap) functions.append(element.first);
