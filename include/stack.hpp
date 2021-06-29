@@ -50,8 +50,8 @@ T pop(){
     head = NULL;
     tail = NULL;
   }
-
-  return data;
+  
+  return data;:w
 }
 
 template <class T>
