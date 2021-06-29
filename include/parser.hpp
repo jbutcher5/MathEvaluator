@@ -15,13 +15,13 @@ struct Token{
 };
 
 struct me_SepValues{
-  list<Token> infixValues;
+  List<Token> infixValues;
   std::string infix;
 };
 
 struct me_RPN : public me_SepValues{
   std::string RPN;
-  list<Token> RPNValues;
+  List<Token> RPNValues;
 };
 
 inline float _pow(double x, double y) { return (float)pow(x, y); }
@@ -32,7 +32,7 @@ inline float _div(double x, double y) { return (float)(x/y); }
 inline float _sub(double x, double y) { return (float)(x-y); }
 
 template <typename T>
-class me_List : public list<T>{
+class me_List : public List<T>{
 public:
   size_t getIndex(const T data){
     for (int i = 0; i < this->size(); i++){
@@ -136,8 +136,8 @@ private:
 
   me_SepValues seperate(std::string infix){
 
-    list<std::string> store;
-    list<std::string> values;
+    List<std::string> store;
+    List<std::string> values;
 
     std::string joiner;
 
@@ -196,7 +196,7 @@ private:
 
     // Deduce Type From Tokens
 
-    list<Token> typedValues;
+    List<Token> typedValues;
 
     for (size_t index = 0; index < values.size(); index++){
       const auto i = values.getData(index);
@@ -227,7 +227,7 @@ private:
     me_SepValues sep = seperate(infix);
 
     Stack<Token> stack;
-    list<Token> queue;
+    List<Token> queue;
 
     for (size_t index = 0; index < sep.infixValues.size(); index++){
       const auto i = sep.infixValues.getData(index);
@@ -286,7 +286,7 @@ private:
     }
 
     std::string joiner = "";
-    list<Token> fixedQueue;
+    List<Token> fixedQueue;
 
     for (size_t index = 0; index < queue.size(); index++){
       const auto i = queue.getData(index);
@@ -336,9 +336,9 @@ private:
 
   me_List<std::string> externalVariables;
 
-  list<std::string> functions;
-  list<std::string> operators;
-  list<std::string> symbols;
+  List<std::string> functions;
+  List<std::string> operators;
+  List<std::string> symbols;
 
   void populateArrays(){
     std::string symArr[3] = {"(", ")", ","};

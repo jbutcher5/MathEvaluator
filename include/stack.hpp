@@ -51,7 +51,7 @@ T pop(){
     tail = NULL;
   }
 
-    return data;
+  return data;
 }
 
 template <class T>
