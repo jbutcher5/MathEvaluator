@@ -1,6 +1,9 @@
 # MathEvaluator
 
-MathEvaluator is quite a basic C++ library that evaluates infix math expressions. MathEvaluator has a focus on simplicity, simply one header file that you include into your project and only a few commands to get a working evalutation.
+MathEvaluator is quite a basic C++ library that evaluates infix math expressions. MathEvaluator has a focus on simplicity, simply one header file and implementation file that you include and compile into your project and only a few commands to get a working evalutation.
+
+## Compiling
+To compile `./test/test.cpp` you must compile `./include/parser.cpp` alongside it. This can be done with `g++ ./test/test.cpp ./include/parser.cpp`. 
 
 ## Examples
 
