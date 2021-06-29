@@ -34,16 +34,19 @@ inline float _sub(double x, double y) { return (float)(x-y); }
 template <typename T>
 class me_List : public List<T>{
 public:
-  size_t getIndex(const T data){
-    for (int i = 0; i < this->size(); i++){
-      if (this->getData(i) == data){
-        return i;
-      }
-    }
-
-    return 0;
-  }
+  size_t getIndex(const T);
 };
+
+template <class T>
+size_t me_List<T>::getIndex(const T data){
+  for (int i = 0; i < this->size(); i++){
+    if (this->getData(i) == data){
+      return i;
+    }
+  }
+
+  return 0;
+}
 
 class MathEvaluator{
 public:
