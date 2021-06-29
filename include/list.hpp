@@ -1,7 +1,7 @@
 #pragma once
 
 template <typename T>
-class list{
+class List{
 private:
   bool listCheck(){
     return (head != NULL) && (tail != NULL);
@@ -26,7 +26,7 @@ public:
 };
 
 template <class T>
-void list<T>::append(const T data){
+void List<T>::append(const T data){
   Node* new_node = new Node;
   T* new_data = new T;
 
@@ -42,7 +42,7 @@ void list<T>::append(const T data){
 }
 
 template <class T>
-size_t list<T>::size(){
+size_t List<T>::size(){
   if (!listCheck()) return 0;
 
   Node* curr = head;
@@ -60,7 +60,7 @@ size_t list<T>::size(){
 }
 
 template <class T>
-typename list<T>::Node* list<T>::getNode(const size_t index){
+typename List<T>::Node* List<T>::getNode(const size_t index){
 
   Node* curr = head;
 
@@ -78,12 +78,12 @@ typename list<T>::Node* list<T>::getNode(const size_t index){
 }
 
 template <class T>
-T list<T>::getData(const size_t index){
+T List<T>::getData(const size_t index){
   return *(getNode(index)->data);
 }
 
 template <class T>
-void list<T>::remove(const size_t index){
+void List<T>::remove(const size_t index){
   if (!listCheck()) return;
 
   // In-Case HEAD
@@ -133,7 +133,7 @@ void list<T>::remove(const size_t index){
 }
 
 template <class T>
-void list<T>::freeAll(){
+void List<T>::freeAll(){
   while (size() > 0){
     remove(0);
   }
@@ -143,7 +143,7 @@ void list<T>::freeAll(){
 }
 
 template <class T>
-bool list<T>::inList(const T data){
+bool List<T>::inList(const T data){
   for (int i = 0; i < size(); i++){
     if (getData(i) == data){
       return true;
