@@ -16,130 +16,139 @@ public:
   Node* head = NULL;
   Node* tail = NULL;
 
-  void append(const T data){
-    Node* new_node = new Node;
-    T* new_data = new T;
+  void append(const T);
+  size_t size();
+  Node* getNode(const size_t);
+  T getData(const size_t);
+  void remove(const size_t);
+  void freeAll();
+  bool inList(const T);
+};
 
-    *new_data = data;
+template <class T>
+void list<T>::append(const T data){
+  Node* new_node = new Node;
+  T* new_data = new T;
 
-    new_node->data = new_data;
+  *new_data = data;
 
-    if (head == NULL) head = new_node;
-    if (tail != NULL)
-      tail->next = new_node;
+  new_node->data = new_data;
 
-    tail = new_node;
-  }
+  if (head == NULL) head = new_node;
+  if (tail != NULL)
+    tail->next = new_node;
 
-  size_t size(){
-    if (!listCheck()) return 0;
+  tail = new_node;
+}
 
-    Node* curr = head;
+template <class T>
+size_t list<T>::size(){
+  if (!listCheck()) return 0;
 
-    size_t size = 0;
+  Node* curr = head;
 
-    while (curr->next != NULL){
-      size++;
-      curr = curr->next;
-    }
+  size_t size = 0;
 
+  while (curr->next != NULL){
     size++;
-
-    return size;
+    curr = curr->next;
   }
 
-  Node* getNode(const size_t index){
+  size++;
 
-    Node* curr = head;
+  return size;
+}
 
-    size_t i = 0;
+template <class T>
+typename list<T>::Node* list<T>::getNode(const size_t index){
 
-    if (index == size()-1) return tail;
+  Node* curr = head;
 
-    while (curr->next != NULL){
-      if (i == index) return curr;
-      curr = curr->next;
-      i++;
-    }
+  size_t i = 0;
 
-    return NULL;
+  if (index == size()-1) return tail;
+
+  while (curr->next != NULL){
+    if (i == index) return curr;
+    curr = curr->next;
+    i++;
   }
 
-  T getData(const size_t index){
-    return *(getNode(index)->data);
+  return NULL;
+}
+
+template <class T>
+T list<T>::getData(const size_t index){
+  return *(getNode(index)->data);
+}
+
+template <class T>
+void list<T>::remove(const size_t index){
+  if (!listCheck()) return;
+
+  // In-Case HEAD
+
+  if (!index){
+    Node* to_link = head->next;
+
+    delete head->data;
+    delete head;
+
+    head = to_link;
+
+    return;
   }
 
-  void remove(const size_t index){
-    if (!listCheck()) return;
+  Node* curr = head;
 
-    // In-Case HEAD
+  size_t i = 0;
 
-    if (!index){
-      Node* to_link = head->next;
-
-      delete head->data;
-      delete head;
-
-      head = to_link;
-
+  while (i != index-1) {
+    if (curr->next == NULL && i != index){
       return;
     }
 
-    Node* curr = head;
+    curr = curr->next;
 
-    size_t i = 0;
+    i++;
+  }
 
-    while (i != index-1) {
-      if (curr->next == NULL && i != index){
-        return;
-      }
+  // In-Case TAIL
 
-      curr = curr->next;
-
-      i++;
-    }
-
-    // In-Case TAIL
-
-    if (curr->next->next == NULL){
-      delete curr->next->data;
-      delete curr->next;
-      curr->next = NULL;
-      tail = curr;
-      return;
-    }
-
-    Node* to_link = curr->next->next;
-
+  if (curr->next->next == NULL){
     delete curr->next->data;
     delete curr->next;
-
-    curr->next = to_link;
-
+    curr->next = NULL;
+    tail = curr;
+    return;
   }
 
-  void freeAll(){
-    while (size() > 0){
-      remove(0);
+  Node* to_link = curr->next->next;
+
+  delete curr->next->data;
+  delete curr->next;
+
+  curr->next = to_link;
+
+}
+
+template <class T>
+void list<T>::freeAll(){
+  while (size() > 0){
+    remove(0);
+  }
+
+  head = NULL;
+  tail = NULL;
+}
+
+template <class T>
+bool list<T>::inList(const T data){
+  for (int i = 0; i < size(); i++){
+    if (getData(i) == data){
+      return true;
     }
-
-    head = NULL;
-    tail = NULL;
   }
 
-  template<size_t K>
-  void appendArr(const T arr[K]){
-    for (int i = 0; i < K; i++) append(arr[i]);
-  }
-
-  bool inList(const T data){
-    for (int i = 0; i < size(); i++){
-      if (getData(i) == data){
-        return true;
-      }
-    }
-
-    return false;
-  }
-
-};
+  return false;
+}
