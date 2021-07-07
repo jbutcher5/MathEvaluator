@@ -43,7 +43,7 @@ double MathEvaluator::eval(const std::string expr){
 
       if (operands > (int)resultStack.size()) return 0.0;
 
-      std::array<double, 2> values;
+      double values[2];
 
       for (int i = 0; i < operands; i++){
         values[i] = resultStack.pop();
@@ -67,7 +67,7 @@ double MathEvaluator::eval(const std::string expr){
       }
 
       else if (functionParameters[token.value] == 2){
-        std::array<double, 2> values;
+        double values[2];
 
         for (int i = 0; i < 2; i++){
           values[i] = resultStack.pop();
