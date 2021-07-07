@@ -81,7 +81,13 @@ double MathEvaluator::eval(const std::string expr){
 
   if ((int)resultStack.size() > 1 || (int)resultStack.size() < 1) return 0.0;
 
-  return round(resultStack.peak() * 10000) / 10000;
+  double result = round(resultStack.peak() * 10000) / 10000;
+
+  rpn.RPNValues.freeAll();
+  rpn.infixValues.freeAll();
+  resultStack.freeAll();
+
+  return result;
 }
 
 me_RPN MathEvaluator::getRPN(){
@@ -177,6 +183,9 @@ me_SepValues MathEvaluator::seperate(std::string infix){
 
   result.infixValues = typedValues;
 
+  store.freeAll();
+  values.freeAll();
+
   return result;
 }
 
@@ -258,6 +267,9 @@ me_RPN MathEvaluator::compile(const std::string infix){
   result.infixValues = sep.infixValues;
   result.RPNValues = fixedQueue;
   result.RPN = joiner;
+
+  stack.freeAll();
+  queue.freeAll();
 
   return result;
 }

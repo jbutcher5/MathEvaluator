@@ -17,6 +17,7 @@ public:
   T pop();
   T peak();
   size_t size();
+  void freeAll();
 };
 
 template <class T>
@@ -76,4 +77,14 @@ size_t Stack<T>::size(){
   result++;
 
   return result;
+}
+
+template <class T>
+void Stack<T>::freeAll(){
+  while (size() > 0){
+    pop();
+  }
+
+  head = NULL;
+  tail = NULL;
 }
