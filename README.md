@@ -7,9 +7,11 @@ MathEvaluator is quite a basic C++ library that evaluates infix math expressions
 ### Standard C++
 To compile `./test/test.cpp` you must compile `./include/parser.cpp` alongside it. This can be done with `g++ ./test/test.cpp ./include/parser.cpp`. 
 
+### CMake
+You can compile the test cases with CMake. `cmake CMakeLists.txt` and make with `make`.
+
 ### Webassembly
 Install [emscripten](https://emscripten.org/docs/getting_started/downloads.html#platform-notes-installation-instructions-sdk) and compile `./test/test.cpp` with `em++ ./test/test.cpp ./include/parser.cpp`
-
 
 ## Examples
 
