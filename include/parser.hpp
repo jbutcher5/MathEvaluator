@@ -50,12 +50,12 @@ size_t me_List<T>::getIndex(const T data){
 
 class MathEvaluator{
 public:
-  MathEvaluator();
+  MathEvaluator() {populateArrays();};
   void appendVariable(const std::string, double&);
   void deleteVariable(const std::string);
   double eval(const std::string);
-  me_RPN getRPN();
-  std::map<std::string, double*> getExternalVariables();
+  me_RPN getRPN() {return rpn;};
+  std::map<std::string, double*> getExternalVariables() {return externalVariablesMap;};
 
 private:
 

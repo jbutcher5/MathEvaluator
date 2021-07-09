@@ -7,10 +7,6 @@
 #include "list.hpp"
 #include "stack.hpp"
 
-MathEvaluator::MathEvaluator(){
-  populateArrays();
-}
-
 void MathEvaluator::appendVariable(const std::string name, double &value){
   externalVariablesMap[name] = &value;
 
@@ -88,14 +84,6 @@ double MathEvaluator::eval(const std::string expr){
   resultStack.freeAll();
 
   return result;
-}
-
-me_RPN MathEvaluator::getRPN(){
-  return rpn;
-}
-
-std::map<std::string, double*> MathEvaluator::getExternalVariables(){
-  return externalVariablesMap;
 }
 
 me_SepValues MathEvaluator::seperate(std::string infix){
