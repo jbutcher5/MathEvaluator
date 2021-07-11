@@ -1,12 +1,14 @@
 #include <iostream>
 #include <string>
 #include <vector>
+
 #include "../include/parser.hpp"
+#include "../include/list.hpp"
 
 #define LOG(x) std::cout << x << std::endl
 
-bool test(std::vector<std::string> input, std::vector<std::string> RPN, std::vector<double> result){
-  if (input.size() != RPN.size() || input.size() != result.size() || RPN.size() != result.size()){
+bool test(List<std::string>* input, List<std::string>* RPN, List<double>* result){
+  if (input->size() != RPN->size() || input->size() != result->size() || RPN->size() != result->size()){
     LOG("Test Failed!");
     LOG("Invalid Lengths!");
     return true;
@@ -22,42 +24,44 @@ bool test(std::vector<std::string> input, std::vector<std::string> RPN, std::vec
     int rpn_score = 0;
     int evaluation_score = 0;
 
-    std::vector<double> RPN_Values;
+    List<double> RPN_Values;
 
     LOG("Convertion");
 
-    for (int x = 0; x < (int)input.size(); x++){
+    for (int x = 0; x < (int)input->size(); x++){
 
-      double u = parser.eval(input[x]);
+      double u = parser.eval(input->getData(x));
 
-      if (parser.getRPN().RPN == RPN[x]){
-        LOG(input[x] << " -> " << RPN[x] << " | Success");
+      if (parser.getRPN().RPN == RPN->getData(x)){
+        LOG(input->getData(x) << " -> " << RPN->getData(x) << " | Success");
         rpn_score++;
       }
 
       else{
-        LOG(input[x] << " -> " << RPN[x] << " (" << parser.getRPN().RPN << ") | Failed");
+        LOG(input->getData(x) << " -> " << RPN->getData(x) << " (" << parser.getRPN().RPN << ") | Failed");
       }
 
-      RPN_Values.push_back(u);
+      RPN_Values.append(u);
     }
 
     LOG("Evaluation");
 
-    for (int x = 0; x < (int)input.size(); x++){
-      double evaluation = RPN_Values[x];
+    LOG(input->size());
 
-      if (evaluation == result[x]){
-        LOG(input[x] << " -> " << result[x] << " | Success");
+    for (int x = 0; x < (int)input->size(); x++){
+      double evaluation = RPN_Values.getData(x);
+
+      if (evaluation == result->getData(x)){
+        LOG(input->getData(x) << " -> " << result->getData(x) << " | Success");
         evaluation_score++;
       }
 
       else{
-        LOG(input[x] << " -> " << result[x] << " (" << evaluation << ") | Failed");
+        LOG(input->getData(x) << " -> " << result->getData(x) << " (" << evaluation << ") | Failed");
       }
     }
 
-    if (rpn_score == (int)input.size() && evaluation_score == (int)input.size()) return false;
+    if (rpn_score == (int)input->size() && evaluation_score == (int)input->size()) return false;
 
   }
 
@@ -66,9 +70,16 @@ bool test(std::vector<std::string> input, std::vector<std::string> RPN, std::vec
 }
 
 int main(){
-  std::vector<std::string> input = {"1+1", "5%2", "4+8*3", "-5+20*30", "(4+8)*3", "6+9+(4*2+4^2)", "2*(1+(4*(2+1)+3))", "(5.9-5.3)*7.2+1.4^2", "2*20/2+(3+4)*3^2-6+15", "sin(1.5707963267948966)", "sqrt(4)", "x", "x+3"};
-  std::vector<std::string> RPN = {"11+", "52%", "483*+", "-52030*+", "48+3*", "69+42*42^++", "21421+*3++*", "5.95.3-7.2*1.42^+", "220*2/34+32^*+6-15+", "1.5707963267948966sin", "4sqrt", "x", "x3+"};
-  std::vector<double> result = {2, 1, 28, 595, 36, 39, 32, 6.28, 92, 1, 2, 10, 13};
+  std::string input_arr[] = {"1+1", "5%2", "4+8*3", "-5+20*30", "(4+8)*3", "6+9+(4*2+4^2)", "2*(1+(4*(2+1)+3))", "(5.9-5.3)*7.2+1.4^2", "2*20/2+(3+4)*3^2-6+15", "sin(1.5707963267948966)", "sqrt(4)", "x", "x+3"};
+  std::string RPN_arr[] = {"11+", "52%", "483*+", "-52030*+", "48+3*", "69+42*42^++", "21421+*3++*", "5.95.3-7.2*1.42^+", "220*2/34+32^*+6-15+", "1.5707963267948966sin", "4sqrt", "x", "x3+"};
+  double result_arr[] = {2, 1, 28, 595, 36, 39, 32, 6.28, 92, 1, 2, 10, 13};
 
-  return test(input, RPN, result);
+  List<std::string> input;
+  input.append(input_arr, sizeof(input_arr)/sizeof(input_arr[0]));  
+  List<std::string> RPN;
+  RPN.append(RPN_arr, sizeof(RPN_arr)/sizeof(RPN_arr[0]));
+  List<double> result;
+  result.append(result_arr, sizeof(result_arr)/sizeof(result_arr[0]));
+
+  return test(&input, &RPN, &result);
 }
