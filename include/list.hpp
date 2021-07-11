@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+
 template <typename T>
 class List{
 private:
@@ -17,12 +19,14 @@ public:
   Node* tail = NULL;
 
   void append(const T);
+  void append(const T*, const size_t);
   size_t size();
   Node* getNode(const size_t);
   T getData(const size_t);
   void remove(const size_t);
   void freeAll();
   bool inList(const T);
+
 };
 
 template <class T>
@@ -39,6 +43,11 @@ void List<T>::append(const T data){
     tail->next = new_node;
 
   tail = new_node;
+}
+
+template <class T>
+void List<T>::append(const T* data, const size_t length){	
+  for (int i = 0; i < length; i++) append(*(data + i));
 }
 
 template <class T>
