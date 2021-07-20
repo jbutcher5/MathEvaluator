@@ -29,7 +29,8 @@ inline float _mod(double x, double y) { return (float)((int)x % (int)y); }
 inline float _add(double x, double y) { return (float)(x+y); }
 inline float _mul(double x, double y) { return (float)(x*y); }
 inline float _div(double x, double y) { return (float)(x/y); }
-inline float _sub(double x, double y) { return (float)(x-y); }
+inline float _sub(double x, double y) { return (float)(x - y); }
+inline float _factorial(double x, double y) { return (float)(int)std::round(sqrt(2 * M_PI * y) * pow(y / M_E, y)); }
 
 template <typename T>
 class me_List : public List<T>{
@@ -67,23 +68,23 @@ private:
   std::map<std::string, double (*)(double, double)> multipleParameterFunction;
   std::map<std::string, double*> externalVariablesMap;
   std::map<std::string, double (*)(double)> functionsMap = {
-      {"sin", sin},   {"cos", cos},   {"tan", tan},
-      {"asin", asin}, {"acos", acos}, {"atan", atan},
-      {"sqrt", sqrt}};
+  {"sin", sin},   {"cos", cos},   {"tan", tan},
+  {"asin", asin}, {"acos", acos}, {"atan", atan},
+  {"sqrt", sqrt}};
   std::map<std::string, std::string> operatorTranslationTable = {
-      {"^", "pow"}, {"*", "mul"}, {"/", "div"}, {"+", "add"}, {"-", "sub"}, {"%", "mod"}};
+  {"!", "factorial"}, {"^", "pow"}, {"*", "mul"}, {"/", "div"}, {"+", "add"}, {"-", "sub"}, {"%", "mod"}};
   std::map<std::string, int> functionParameters = {
-      {"sin", 1},   {"cos", 1},   {"tan", 1},
-      {"asin", 1}, {"acos", 1}, {"atan", 1},
-      {"pow", 2}, {"mul", 2}, {"div", 2},
-      {"add", 2}, {"sub", 2}, {"mod", 2},
-      {"sqrt", 1}};
+  {"sin", 1}, {"cos", 1},   {"tan", 1},
+  {"asin", 1}, {"acos", 1}, {"atan", 1},
+  {"pow", 2}, {"mul", 2}, {"div", 2},
+  {"add", 2}, {"sub", 2}, {"mod", 2},
+  {"sqrt", 1}, {"factorial", 1}};
   std::map<std::string, int> operatorPrecedence = {
-      {"^", 4}, {"*", 3}, {"/", 3}, {"%", 3}, {"+", 2}, {"-", 2}};
+  {"!", 5}, {"^", 4}, {"*", 3}, {"/", 3}, {"%", 3}, {"+", 2}, {"-", 2}};
   std::map<std::string, float (*)(double, double)> operatorMap = {
-      {"^", _pow}, {"+", _add}, {"-", _sub}, {"*", _mul}, {"/", _div}, {"%", _mod}};
+  {"!", _factorial}, {"^", _pow}, {"+", _add}, {"-", _sub}, {"*", _mul}, {"/", _div}, {"%", _mod}};
   std::map<std::string, int> operatorAssociative = {
-      {"^", 1}, {"*", 0}, {"/", 0}, {"+", 0}, {"-", 0}, {"%", 0}};
+  {"!", 1}, {"^", 1}, {"*", 0}, {"/", 0}, {"+", 0}, {"-", 0}, {"%", 0}};
   me_List<std::string> externalVariables;
   List<std::string> functions;
   List<std::string> operators;
