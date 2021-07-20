@@ -7,6 +7,30 @@
 #include "list.hpp"
 #include "stack.hpp"
 
+#include <iostream>
+
+float _factorial(double x, double y, bool aoe) {
+  if (aoe){
+    float factorial = 1;
+    for (int i = 1; i <= y; i++)
+      factorial *= i;
+
+    return factorial;
+  }
+  return (float)(int)std::round(sqrt(2 * M_PI * y) * pow(y / M_E, y));
+}
+
+
+MathEvaluator::MathEvaluator(){
+  populateArrays();
+  aoe = true;
+}
+
+MathEvaluator::MathEvaluator(bool accuracyOverEfficieny){
+  populateArrays();
+  aoe = accuracyOverEfficieny;
+}
+
 void MathEvaluator::appendVariable(const std::string name, double &value){
   externalVariablesMap[name] = &value;
 
@@ -45,7 +69,7 @@ double MathEvaluator::eval(const std::string expr){
         values[i] = resultStack.pop();
       }
 
-      resultStack.push((double)operatorMap[token.value](values[1], values[0]));
+      resultStack.push((double)operatorMap[token.value](values[1], values[0], aoe));
     }
     
     else if (isOperand){
