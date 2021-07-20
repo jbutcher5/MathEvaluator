@@ -7,6 +7,14 @@
 #include "list.hpp"
 #include "stack.hpp"
 
+inline float _pow(double x, double y, bool aoe) { return (float)pow(x, y); }
+inline float _mod(double x, double y, bool aoe) { return (float)((int)x % (int)y); }
+inline float _add(double x, double y, bool aoe) { return (float)(x + y); }
+inline float _mul(double x, double y, bool aoe) { return (float)(x*y); }
+inline float _div(double x, double y, bool aoe) { return (float)(x/y); }
+inline float _sub(double x, double y, bool aoe) { return (float)(x-y); }
+float _factorial(double x, double y, bool aoe);
+
 enum token_type{ OPERATOR, OPERAND, SYMBOL, FUNCTION };
 
 struct Token{
@@ -23,14 +31,6 @@ struct me_RPN : public me_SepValues{
   std::string RPN;
   List<Token> RPNValues;
 };
-
-inline float _pow(double x, double y) { return (float)pow(x, y); }
-inline float _mod(double x, double y) { return (float)((int)x % (int)y); }
-inline float _add(double x, double y) { return (float)(x+y); }
-inline float _mul(double x, double y) { return (float)(x*y); }
-inline float _div(double x, double y) { return (float)(x/y); }
-inline float _sub(double x, double y) { return (float)(x - y); }
-inline float _factorial(double x, double y) { return (float)(int)std::round(sqrt(2 * M_PI * y) * pow(y / M_E, y)); }
 
 template <typename T>
 class me_List : public List<T>{
@@ -51,7 +51,8 @@ size_t me_List<T>::getIndex(const T data){
 
 class MathEvaluator{
 public:
-  MathEvaluator() {populateArrays();};
+  MathEvaluator();
+  MathEvaluator(bool);
   void appendVariable(const std::string, double&);
   void deleteVariable(const std::string);
   double eval(const std::string);
@@ -63,6 +64,7 @@ private:
   me_SepValues seperate(std::string);
   me_RPN compile(const std::string);
   void populateArrays();
+
 
   me_RPN rpn;
   std::map<std::string, double (*)(double, double)> multipleParameterFunction;
@@ -81,7 +83,7 @@ private:
   {"sqrt", 1}, {"factorial", 1}};
   std::map<std::string, int> operatorPrecedence = {
   {"!", 5}, {"^", 4}, {"*", 3}, {"/", 3}, {"%", 3}, {"+", 2}, {"-", 2}};
-  std::map<std::string, float (*)(double, double)> operatorMap = {
+  std::map<std::string, float (*)(double, double, bool)> operatorMap = {
   {"!", _factorial}, {"^", _pow}, {"+", _add}, {"-", _sub}, {"*", _mul}, {"/", _div}, {"%", _mod}};
   std::map<std::string, int> operatorAssociative = {
   {"!", 1}, {"^", 1}, {"*", 0}, {"/", 0}, {"+", 0}, {"-", 0}, {"%", 0}};
@@ -89,6 +91,8 @@ private:
   List<std::string> functions;
   List<std::string> operators;
   List<std::string> symbols;
+
+  bool aoe;
 };
 
 double evaluate(const std::string);
