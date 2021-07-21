@@ -7,23 +7,23 @@
 #include "list.hpp"
 #include "stack.hpp"
 
-#include <iostream>
-
 float _factorial(double x, double y, bool aoe) {
-  if (aoe){
+  if (aoe && aoe == (float)(int)aoe){
     float factorial = 1;
     for (int i = 1; i <= y; i++)
       factorial *= i;
 
     return factorial;
   }
-  return (float)(int)std::round(sqrt(2 * M_PI * y) * pow(y / M_E, y));
+  return (float)(sqrt(2 * M_PI * y) * pow(y / M_E, y));
 }
-
 
 MathEvaluator::MathEvaluator(){
   populateArrays();
   aoe = true;
+
+  externalVariables.append("pi");
+  externalVariables.append("e");
 }
 
 MathEvaluator::MathEvaluator(bool accuracyOverEfficieny){
