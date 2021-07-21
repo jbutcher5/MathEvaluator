@@ -65,10 +65,12 @@ private:
   me_RPN compile(const std::string);
   void populateArrays();
 
+    double pi = (double)M_PI;
+    double e = (double)M_E;
 
   me_RPN rpn;
   std::map<std::string, double (*)(double, double)> multipleParameterFunction;
-  std::map<std::string, double*> externalVariablesMap;
+  std::map<std::string, double*> externalVariablesMap{{"pi", &pi}, {"e", &e}};
   std::map<std::string, double (*)(double)> functionsMap = {
   {"sin", sin},   {"cos", cos},   {"tan", tan},
   {"asin", asin}, {"acos", acos}, {"atan", atan},
