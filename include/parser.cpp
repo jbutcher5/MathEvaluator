@@ -7,15 +7,17 @@
 #include "list.hpp"
 #include "stack.hpp"
 
-float _factorial(double x, double y, bool aoe) {
-  if (aoe && aoe == (float)(int)aoe){
-    float factorial = 1;
+typedef long double ldouble;
+
+ldouble _factorial(ldouble x, ldouble y, bool aoe) {
+  if (aoe && y == (ldouble)(int)y){
+    ldouble factorial = 1L;
     for (int i = 1; i <= y; i++)
       factorial *= i;
 
     return factorial;
   }
-  return (float)(sqrt(2 * M_PI * y) * pow(y / M_E, y));
+  return sqrt(2 * M_PI * y) * pow(y / M_E, y);
 }
 
 MathEvaluator::MathEvaluator(){
@@ -43,11 +45,11 @@ void MathEvaluator::deleteVariable(const std::string name){
   externalVariables.remove(externalVariables.getIndex(name));
 }
 
-double MathEvaluator::eval(const std::string expr){
+ldouble MathEvaluator::eval(const std::string expr){
 
   rpn = compile(expr);
 
-  Stack<double> resultStack;
+  Stack<ldouble> resultStack;
 
   for (size_t index = 0; index < rpn.RPNValues.size(); index++){
     const Token token = rpn.RPNValues.getData(index);
@@ -63,31 +65,31 @@ double MathEvaluator::eval(const std::string expr){
 
       if (operands > (int)resultStack.size()) return 0.0;
 
-      double values[2];
+      ldouble values[2];
 
       for (int i = 0; i < operands; i++){
         values[i] = resultStack.pop();
       }
 
-      resultStack.push((double)operatorMap[token.value](values[1], values[0], aoe));
+      resultStack.push(operatorMap[token.value](values[1], values[0], aoe));
     }
     
     else if (isOperand){
-      resultStack.push(round(std::stod(token.value) * 10000) / 10000);
+      resultStack.push(std::stod(token.value));
     }
 
     else if (isVariable){
-      resultStack.push((double)*externalVariablesMap[token.value]);
+      resultStack.push(*externalVariablesMap[token.value]);
     }
 
     if (isFunction){
       if (functionParameters[token.value] == 1){
-        double value = resultStack.pop();
+        ldouble value = resultStack.pop();
         resultStack.push(functionsMap[token.value](value));
       }
 
       else if (functionParameters[token.value] == 2){
-        double values[2];
+        ldouble values[2];
 
         for (int i = 0; i < 2; i++){
           values[i] = resultStack.pop();
@@ -101,7 +103,7 @@ double MathEvaluator::eval(const std::string expr){
 
   if ((int)resultStack.size() > 1 || (int)resultStack.size() < 1) return 0.0;
 
-  double result = round(resultStack.peak() * 10000) / 10000;
+  ldouble result = resultStack.peak();
 
   rpn.RPNValues.freeAll();
   rpn.infixValues.freeAll();
@@ -294,7 +296,7 @@ void MathEvaluator::populateArrays(){
   for (auto const &element : functionsMap) functions.append(element.first);
 }
 
-double evaluate(const std::string infix){
+ldouble evaluate(const std::string infix){
   MathEvaluator evaluator;
   return evaluator.eval(infix);
 }
