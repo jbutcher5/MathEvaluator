@@ -15,7 +15,7 @@ public:
 
   void push(T);
   T pop();
-  T peak();
+  T peek();
   size_t size();
   void freeAll();
 };
@@ -56,7 +56,7 @@ T Stack<T>::pop(){
 }
 
 template <class T>
-T Stack<T>::peak(){
+T Stack<T>::peek(){
   return *(tail->data);
 }
 

@@ -7,13 +7,15 @@
 #include "list.hpp"
 #include "stack.hpp"
 
-inline float _pow(double x, double y, bool aoe) { return (float)pow(x, y); }
-inline float _mod(double x, double y, bool aoe) { return (float)((int)x % (int)y); }
-inline float _add(double x, double y, bool aoe) { return (float)(x + y); }
-inline float _mul(double x, double y, bool aoe) { return (float)(x*y); }
-inline float _div(double x, double y, bool aoe) { return (float)(x/y); }
-inline float _sub(double x, double y, bool aoe) { return (float)(x-y); }
-float _factorial(double x, double y, bool aoe);
+typedef long double ldouble;
+
+inline ldouble _pow(ldouble x, ldouble y, bool aoe) { return (ldouble)pow(x, y); }
+inline ldouble _mod(ldouble x, ldouble y, bool aoe) { return (ldouble)((int)x % (int)y); }
+inline ldouble _add(ldouble x, ldouble y, bool aoe) { return (ldouble)(x + y); }
+inline ldouble _mul(ldouble x, ldouble y, bool aoe) { return (ldouble)(x*y); }
+inline ldouble _div(ldouble x, ldouble y, bool aoe) { return (ldouble)(x/y); }
+inline ldouble _sub(ldouble x, ldouble y, bool aoe) { return (ldouble)(x-y); }
+ldouble _factorial(ldouble x, ldouble y, bool aoe);
 
 enum token_type{ OPERATOR, OPERAND, SYMBOL, FUNCTION };
 
@@ -55,7 +57,7 @@ public:
   MathEvaluator(bool);
   void appendVariable(const std::string, double&);
   void deleteVariable(const std::string);
-  double eval(const std::string);
+  ldouble eval(const std::string);
   me_RPN getRPN() {return rpn;};
   std::map<std::string, double*> getExternalVariables() {return externalVariablesMap;};
 
@@ -69,7 +71,7 @@ private:
     double e = (double)M_E;
 
   me_RPN rpn;
-  std::map<std::string, double (*)(double, double)> multipleParameterFunction;
+  std::map<std::string, ldouble (*)(ldouble, ldouble)> multipleParameterFunction;
   std::map<std::string, double*> externalVariablesMap{{"pi", &pi}, {"e", &e}};
   std::map<std::string, double (*)(double)> functionsMap = {
   {"sin", sin},   {"cos", cos},   {"tan", tan},
@@ -85,7 +87,7 @@ private:
   {"sqrt", 1}, {"factorial", 1}};
   std::map<std::string, int> operatorPrecedence = {
   {"!", 5}, {"^", 4}, {"*", 3}, {"/", 3}, {"%", 3}, {"+", 2}, {"-", 2}};
-  std::map<std::string, float (*)(double, double, bool)> operatorMap = {
+  std::map<std::string, ldouble (*)(ldouble, ldouble, bool)> operatorMap = {
   {"!", _factorial}, {"^", _pow}, {"+", _add}, {"-", _sub}, {"*", _mul}, {"/", _div}, {"%", _mod}};
   std::map<std::string, int> operatorAssociative = {
   {"!", 1}, {"^", 1}, {"*", 0}, {"/", 0}, {"+", 0}, {"-", 0}, {"%", 0}};
@@ -97,4 +99,4 @@ private:
   bool aoe;
 };
 
-double evaluate(const std::string);
+ldouble evaluate(const std::string);
