@@ -103,7 +103,7 @@ ldouble MathEvaluator::eval(const std::string expr){
 
   if ((int)resultStack.size() > 1 || (int)resultStack.size() < 1) return 0.0;
 
-  ldouble result = resultStack.peak();
+  ldouble result = resultStack.peek();
 
   rpn.RPNValues.freeAll();
   rpn.infixValues.freeAll();
@@ -226,8 +226,8 @@ me_RPN MathEvaluator::compile(const std::string infix){
 
     else if (isOperator && !isFunction && !isSymbol) {
       while(stack.size() > 0){
-        if(((stack.peak().type == OPERATOR) && (operatorPrecedence[stack.peak().value] > operatorPrecedence[i.value]))
-            || ((operatorPrecedence[stack.peak().value] == operatorPrecedence[i.value]) && (operatorAssociative[stack.peak().value] == 0) && (stack.peak().value != "("))){
+        if(((stack.peek().type == OPERATOR) && (operatorPrecedence[stack.peek().value] > operatorPrecedence[i.value]))
+            || ((operatorPrecedence[stack.peek().value] == operatorPrecedence[i.value]) && (operatorAssociative[stack.peek().value] == 0) && (stack.peek().value != "("))){
 
           queue.append(stack.pop());
         }
@@ -246,16 +246,16 @@ me_RPN MathEvaluator::compile(const std::string infix){
     }
 
     else if (i.value == ")"){
-      while ((stack.peak().value != "(")){
+      while ((stack.peek().value != "(")){
         queue.append(stack.pop());
       }
 
-      if (stack.peak().value == "("){
+      if (stack.peek().value == "("){
         stack.pop();
       }
 
       if (stack.size() > 0){
-        if (functions.inList(stack.peak().value)){
+        if (functions.inList(stack.peek().value)){
           queue.append(stack.pop());
         }
       }
