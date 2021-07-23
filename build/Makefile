@@ -129,29 +129,29 @@ test/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/build
 .PHONY : test/fast
 
-include/parser.o: include/parser.cpp.o
-.PHONY : include/parser.o
+include/evaluator.o: include/evaluator.cpp.o
+.PHONY : include/evaluator.o
 
 # target to build an object file
-include/parser.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/include/parser.cpp.o
-.PHONY : include/parser.cpp.o
+include/evaluator.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/include/evaluator.cpp.o
+.PHONY : include/evaluator.cpp.o
 
-include/parser.i: include/parser.cpp.i
-.PHONY : include/parser.i
+include/evaluator.i: include/evaluator.cpp.i
+.PHONY : include/evaluator.i
 
 # target to preprocess a source file
-include/parser.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/include/parser.cpp.i
-.PHONY : include/parser.cpp.i
+include/evaluator.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/include/evaluator.cpp.i
+.PHONY : include/evaluator.cpp.i
 
-include/parser.s: include/parser.cpp.s
-.PHONY : include/parser.s
+include/evaluator.s: include/evaluator.cpp.s
+.PHONY : include/evaluator.s
 
 # target to generate assembly for a file
-include/parser.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/include/parser.cpp.s
-.PHONY : include/parser.cpp.s
+include/evaluator.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/include/evaluator.cpp.s
+.PHONY : include/evaluator.cpp.s
 
 test/test.o: test/test.cpp.o
 .PHONY : test/test.o
@@ -186,9 +186,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... test"
-	@echo "... include/parser.o"
-	@echo "... include/parser.i"
-	@echo "... include/parser.s"
+	@echo "... include/evaluator.o"
+	@echo "... include/evaluator.i"
+	@echo "... include/evaluator.s"
 	@echo "... test/test.o"
 	@echo "... test/test.i"
 	@echo "... test/test.s"

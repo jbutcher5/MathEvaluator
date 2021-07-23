@@ -1,4 +1,4 @@
-The system is: Linux - 5.12.14_1 - x86_64
+The system is: Linux - 5.13.4_1 - x86_64
 Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
 Compiler: /usr/bin/cc 
 Build flags: 
@@ -28,10 +28,10 @@ The CXX compiler identification is GNU, found in "/home/james/dev/C++/MathEvalua
 Detecting C compiler ABI info compiled with the following output:
 Change Dir: /home/james/dev/C++/MathEvaluator/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make -f Makefile cmTC_6234e/fast && /usr/bin/make  -f CMakeFiles/cmTC_6234e.dir/build.make CMakeFiles/cmTC_6234e.dir/build
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_a44e8/fast && /usr/bin/make  -f CMakeFiles/cmTC_a44e8.dir/build.make CMakeFiles/cmTC_a44e8.dir/build
 make[1]: Entering directory '/home/james/dev/C++/MathEvaluator/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_6234e.dir/CMakeCCompilerABI.c.o
-/usr/bin/cc   -v -o CMakeFiles/cmTC_6234e.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake-3.20/Modules/CMakeCCompilerABI.c
+Building C object CMakeFiles/cmTC_a44e8.dir/CMakeCCompilerABI.c.o
+/usr/bin/cc   -v -o CMakeFiles/cmTC_a44e8.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake-3.20/Modules/CMakeCCompilerABI.c
 Using built-in specs.
 COLLECT_GCC=/usr/bin/cc
 Target: x86_64-unknown-linux-gnu
@@ -39,8 +39,8 @@ Configured with: /builddir/gcc-10.2.1_pre1/configure --build=x86_64-unknown-linu
 Thread model: posix
 Supported LTO compression algorithms: zlib
 gcc version 10.2.1 20201203 (GCC) 
-COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_6234e.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64'
- /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/cc1 -quiet -v /usr/share/cmake-3.20/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_6234e.dir/CMakeCCompilerABI.c.o -version -o /tmp/ccCsnbsq.s
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_a44e8.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64'
+ /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/cc1 -quiet -v /usr/share/cmake-3.20/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_a44e8.dir/CMakeCCompilerABI.c.o -version -o /tmp/ccF7mlU3.s
 GNU C17 (GCC) version 10.2.1 20201203 (x86_64-unknown-linux-gnu)
 	compiled by GNU C version 10.2.1 20201203, GMP version 6.2.0, MPFR version 4.1.0, MPC version 1.1.0, isl version isl-0.21-GMP
 
@@ -58,15 +58,15 @@ GNU C17 (GCC) version 10.2.1 20201203 (x86_64-unknown-linux-gnu)
 
 GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
 Compiler executable checksum: cd9b8a2d760c33d69d07511fa88cb109
-COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_6234e.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64'
- as -v --64 -o CMakeFiles/cmTC_6234e.dir/CMakeCCompilerABI.c.o /tmp/ccCsnbsq.s
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_a44e8.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64'
+ as -v --64 -o CMakeFiles/cmTC_a44e8.dir/CMakeCCompilerABI.c.o /tmp/ccF7mlU3.s
 GNU assembler version 2.35.1 (x86_64-unknown-linux-gnu) using BFD version (GNU Binutils) 2.35.1
 COMPILER_PATH=/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/
 LIBRARY_PATH=/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_6234e.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64'
-Linking C executable cmTC_6234e
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6234e.dir/link.txt --verbose=1
-/usr/bin/cc  -v CMakeFiles/cmTC_6234e.dir/CMakeCCompilerABI.c.o -o cmTC_6234e 
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_a44e8.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64'
+Linking C executable cmTC_a44e8
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a44e8.dir/link.txt --verbose=1
+/usr/bin/cc  -v CMakeFiles/cmTC_a44e8.dir/CMakeCCompilerABI.c.o -o cmTC_a44e8 
 Using built-in specs.
 COLLECT_GCC=/usr/bin/cc
 COLLECT_LTO_WRAPPER=/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/lto-wrapper
@@ -77,9 +77,9 @@ Supported LTO compression algorithms: zlib
 gcc version 10.2.1 20201203 (GCC) 
 COMPILER_PATH=/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/
 LIBRARY_PATH=/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_6234e' '-mtune=generic' '-march=x86-64'
- /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/collect2 -plugin /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/liblto_plugin.so -plugin-opt=/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccxpgVCS.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_6234e /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64/Scrt1.o /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64/crti.o /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/crtbeginS.o -L/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1 -L/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../.. CMakeFiles/cmTC_6234e.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/crtendS.o /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64/crtn.o
-COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_6234e' '-mtune=generic' '-march=x86-64'
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_a44e8' '-mtune=generic' '-march=x86-64'
+ /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/collect2 -plugin /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/liblto_plugin.so -plugin-opt=/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccal4MSv.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_a44e8 /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64/Scrt1.o /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64/crti.o /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/crtbeginS.o -L/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1 -L/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../.. CMakeFiles/cmTC_a44e8.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/crtendS.o /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64/crtn.o
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_a44e8' '-mtune=generic' '-march=x86-64'
 make[1]: Leaving directory '/home/james/dev/C++/MathEvaluator/build/CMakeFiles/CMakeTmp'
 
 
@@ -103,10 +103,10 @@ Parsed C implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
   ignore line: [Change Dir: /home/james/dev/C++/MathEvaluator/build/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command(s):/usr/bin/make -f Makefile cmTC_6234e/fast && /usr/bin/make  -f CMakeFiles/cmTC_6234e.dir/build.make CMakeFiles/cmTC_6234e.dir/build]
+  ignore line: [Run Build Command(s):/usr/bin/make -f Makefile cmTC_a44e8/fast && /usr/bin/make  -f CMakeFiles/cmTC_a44e8.dir/build.make CMakeFiles/cmTC_a44e8.dir/build]
   ignore line: [make[1]: Entering directory '/home/james/dev/C++/MathEvaluator/build/CMakeFiles/CMakeTmp']
-  ignore line: [Building C object CMakeFiles/cmTC_6234e.dir/CMakeCCompilerABI.c.o]
-  ignore line: [/usr/bin/cc   -v -o CMakeFiles/cmTC_6234e.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake-3.20/Modules/CMakeCCompilerABI.c]
+  ignore line: [Building C object CMakeFiles/cmTC_a44e8.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/usr/bin/cc   -v -o CMakeFiles/cmTC_a44e8.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake-3.20/Modules/CMakeCCompilerABI.c]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=/usr/bin/cc]
   ignore line: [Target: x86_64-unknown-linux-gnu]
@@ -114,8 +114,8 @@ Parsed C implicit link information from above output:
   ignore line: [Thread model: posix]
   ignore line: [Supported LTO compression algorithms: zlib]
   ignore line: [gcc version 10.2.1 20201203 (GCC) ]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_6234e.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64']
-  ignore line: [ /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/cc1 -quiet -v /usr/share/cmake-3.20/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_6234e.dir/CMakeCCompilerABI.c.o -version -o /tmp/ccCsnbsq.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_a44e8.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64']
+  ignore line: [ /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/cc1 -quiet -v /usr/share/cmake-3.20/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_a44e8.dir/CMakeCCompilerABI.c.o -version -o /tmp/ccF7mlU3.s]
   ignore line: [GNU C17 (GCC) version 10.2.1 20201203 (x86_64-unknown-linux-gnu)]
   ignore line: [	compiled by GNU C version 10.2.1 20201203  GMP version 6.2.0  MPFR version 4.1.0  MPC version 1.1.0  isl version isl-0.21-GMP]
   ignore line: []
@@ -133,15 +133,15 @@ Parsed C implicit link information from above output:
   ignore line: []
   ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
   ignore line: [Compiler executable checksum: cd9b8a2d760c33d69d07511fa88cb109]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_6234e.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64']
-  ignore line: [ as -v --64 -o CMakeFiles/cmTC_6234e.dir/CMakeCCompilerABI.c.o /tmp/ccCsnbsq.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_a44e8.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64']
+  ignore line: [ as -v --64 -o CMakeFiles/cmTC_a44e8.dir/CMakeCCompilerABI.c.o /tmp/ccF7mlU3.s]
   ignore line: [GNU assembler version 2.35.1 (x86_64-unknown-linux-gnu) using BFD version (GNU Binutils) 2.35.1]
   ignore line: [COMPILER_PATH=/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/]
   ignore line: [LIBRARY_PATH=/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../:/lib/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_6234e.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64']
-  ignore line: [Linking C executable cmTC_6234e]
-  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6234e.dir/link.txt --verbose=1]
-  ignore line: [/usr/bin/cc  -v CMakeFiles/cmTC_6234e.dir/CMakeCCompilerABI.c.o -o cmTC_6234e ]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_a44e8.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64']
+  ignore line: [Linking C executable cmTC_a44e8]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a44e8.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/cc  -v CMakeFiles/cmTC_a44e8.dir/CMakeCCompilerABI.c.o -o cmTC_a44e8 ]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=/usr/bin/cc]
   ignore line: [COLLECT_LTO_WRAPPER=/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/lto-wrapper]
@@ -152,13 +152,13 @@ Parsed C implicit link information from above output:
   ignore line: [gcc version 10.2.1 20201203 (GCC) ]
   ignore line: [COMPILER_PATH=/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/]
   ignore line: [LIBRARY_PATH=/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../:/lib/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_6234e' '-mtune=generic' '-march=x86-64']
-  link line: [ /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/collect2 -plugin /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/liblto_plugin.so -plugin-opt=/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccxpgVCS.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_6234e /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64/Scrt1.o /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64/crti.o /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/crtbeginS.o -L/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1 -L/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../.. CMakeFiles/cmTC_6234e.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/crtendS.o /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64/crtn.o]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_a44e8' '-mtune=generic' '-march=x86-64']
+  link line: [ /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/collect2 -plugin /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/liblto_plugin.so -plugin-opt=/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccal4MSv.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_a44e8 /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64/Scrt1.o /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64/crti.o /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/crtbeginS.o -L/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1 -L/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../.. CMakeFiles/cmTC_a44e8.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/crtendS.o /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64/crtn.o]
     arg [/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/collect2] ==> ignore
     arg [-plugin] ==> ignore
     arg [/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/liblto_plugin.so] ==> ignore
     arg [-plugin-opt=/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/lto-wrapper] ==> ignore
-    arg [-plugin-opt=-fresolution=/tmp/ccxpgVCS.res] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/ccal4MSv.res] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
     arg [-plugin-opt=-pass-through=-lc] ==> ignore
@@ -173,7 +173,7 @@ Parsed C implicit link information from above output:
     arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
     arg [-pie] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTC_6234e] ==> ignore
+    arg [cmTC_a44e8] ==> ignore
     arg [/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64/Scrt1.o] ==> obj [/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64/Scrt1.o]
     arg [/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64/crti.o] ==> obj [/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64/crti.o]
     arg [/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/crtbeginS.o] ==> obj [/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/crtbeginS.o]
@@ -182,7 +182,7 @@ Parsed C implicit link information from above output:
     arg [-L/lib/../lib64] ==> dir [/lib/../lib64]
     arg [-L/usr/lib/../lib64] ==> dir [/usr/lib/../lib64]
     arg [-L/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../..] ==> dir [/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../..]
-    arg [CMakeFiles/cmTC_6234e.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [CMakeFiles/cmTC_a44e8.dir/CMakeCCompilerABI.c.o] ==> ignore
     arg [-lgcc] ==> lib [gcc]
     arg [--push-state] ==> ignore
     arg [--as-needed] ==> ignore
@@ -213,10 +213,10 @@ Parsed C implicit link information from above output:
 Detecting CXX compiler ABI info compiled with the following output:
 Change Dir: /home/james/dev/C++/MathEvaluator/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make -f Makefile cmTC_8c72c/fast && /usr/bin/make  -f CMakeFiles/cmTC_8c72c.dir/build.make CMakeFiles/cmTC_8c72c.dir/build
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_eb722/fast && /usr/bin/make  -f CMakeFiles/cmTC_eb722.dir/build.make CMakeFiles/cmTC_eb722.dir/build
 make[1]: Entering directory '/home/james/dev/C++/MathEvaluator/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_8c72c.dir/CMakeCXXCompilerABI.cpp.o
-/usr/bin/c++   -v -o CMakeFiles/cmTC_8c72c.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.20/Modules/CMakeCXXCompilerABI.cpp
+Building CXX object CMakeFiles/cmTC_eb722.dir/CMakeCXXCompilerABI.cpp.o
+/usr/bin/c++   -v -o CMakeFiles/cmTC_eb722.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.20/Modules/CMakeCXXCompilerABI.cpp
 Using built-in specs.
 COLLECT_GCC=/usr/bin/c++
 Target: x86_64-unknown-linux-gnu
@@ -224,8 +224,8 @@ Configured with: /builddir/gcc-10.2.1_pre1/configure --build=x86_64-unknown-linu
 Thread model: posix
 Supported LTO compression algorithms: zlib
 gcc version 10.2.1 20201203 (GCC) 
-COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_8c72c.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
- /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/cc1plus -quiet -v -D_GNU_SOURCE /usr/share/cmake-3.20/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_8c72c.dir/CMakeCXXCompilerABI.cpp.o -version -o /tmp/ccsAxm8p.s
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_eb722.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/cc1plus -quiet -v -D_GNU_SOURCE /usr/share/cmake-3.20/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_eb722.dir/CMakeCXXCompilerABI.cpp.o -version -o /tmp/ccAvr56Y.s
 GNU C++14 (GCC) version 10.2.1 20201203 (x86_64-unknown-linux-gnu)
 	compiled by GNU C version 10.2.1 20201203, GMP version 6.2.0, MPFR version 4.1.0, MPC version 1.1.0, isl version isl-0.21-GMP
 
@@ -246,15 +246,15 @@ GNU C++14 (GCC) version 10.2.1 20201203 (x86_64-unknown-linux-gnu)
 
 GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
 Compiler executable checksum: 9ae8d70a088aeda1fc99eee36a345833
-COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_8c72c.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
- as -v --64 -o CMakeFiles/cmTC_8c72c.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccsAxm8p.s
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_eb722.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ as -v --64 -o CMakeFiles/cmTC_eb722.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccAvr56Y.s
 GNU assembler version 2.35.1 (x86_64-unknown-linux-gnu) using BFD version (GNU Binutils) 2.35.1
 COMPILER_PATH=/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/
 LIBRARY_PATH=/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_8c72c.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
-Linking CXX executable cmTC_8c72c
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8c72c.dir/link.txt --verbose=1
-/usr/bin/c++  -v CMakeFiles/cmTC_8c72c.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_8c72c 
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_eb722.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+Linking CXX executable cmTC_eb722
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_eb722.dir/link.txt --verbose=1
+/usr/bin/c++  -v CMakeFiles/cmTC_eb722.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_eb722 
 Using built-in specs.
 COLLECT_GCC=/usr/bin/c++
 COLLECT_LTO_WRAPPER=/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/lto-wrapper
@@ -265,9 +265,9 @@ Supported LTO compression algorithms: zlib
 gcc version 10.2.1 20201203 (GCC) 
 COMPILER_PATH=/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/
 LIBRARY_PATH=/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_8c72c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
- /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/collect2 -plugin /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/liblto_plugin.so -plugin-opt=/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccfOJUsT.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_8c72c /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64/Scrt1.o /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64/crti.o /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/crtbeginS.o -L/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1 -L/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../.. CMakeFiles/cmTC_8c72c.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/crtendS.o /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64/crtn.o
-COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_8c72c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_eb722' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/collect2 -plugin /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/liblto_plugin.so -plugin-opt=/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccsDbhPr.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_eb722 /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64/Scrt1.o /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64/crti.o /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/crtbeginS.o -L/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1 -L/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../.. CMakeFiles/cmTC_eb722.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/crtendS.o /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64/crtn.o
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_eb722' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
 make[1]: Leaving directory '/home/james/dev/C++/MathEvaluator/build/CMakeFiles/CMakeTmp'
 
 
@@ -297,10 +297,10 @@ Parsed CXX implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
   ignore line: [Change Dir: /home/james/dev/C++/MathEvaluator/build/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command(s):/usr/bin/make -f Makefile cmTC_8c72c/fast && /usr/bin/make  -f CMakeFiles/cmTC_8c72c.dir/build.make CMakeFiles/cmTC_8c72c.dir/build]
+  ignore line: [Run Build Command(s):/usr/bin/make -f Makefile cmTC_eb722/fast && /usr/bin/make  -f CMakeFiles/cmTC_eb722.dir/build.make CMakeFiles/cmTC_eb722.dir/build]
   ignore line: [make[1]: Entering directory '/home/james/dev/C++/MathEvaluator/build/CMakeFiles/CMakeTmp']
-  ignore line: [Building CXX object CMakeFiles/cmTC_8c72c.dir/CMakeCXXCompilerABI.cpp.o]
-  ignore line: [/usr/bin/c++   -v -o CMakeFiles/cmTC_8c72c.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.20/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Building CXX object CMakeFiles/cmTC_eb722.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/usr/bin/c++   -v -o CMakeFiles/cmTC_eb722.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.20/Modules/CMakeCXXCompilerABI.cpp]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=/usr/bin/c++]
   ignore line: [Target: x86_64-unknown-linux-gnu]
@@ -308,8 +308,8 @@ Parsed CXX implicit link information from above output:
   ignore line: [Thread model: posix]
   ignore line: [Supported LTO compression algorithms: zlib]
   ignore line: [gcc version 10.2.1 20201203 (GCC) ]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_8c72c.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
-  ignore line: [ /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/cc1plus -quiet -v -D_GNU_SOURCE /usr/share/cmake-3.20/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_8c72c.dir/CMakeCXXCompilerABI.cpp.o -version -o /tmp/ccsAxm8p.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_eb722.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  ignore line: [ /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/cc1plus -quiet -v -D_GNU_SOURCE /usr/share/cmake-3.20/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_eb722.dir/CMakeCXXCompilerABI.cpp.o -version -o /tmp/ccAvr56Y.s]
   ignore line: [GNU C++14 (GCC) version 10.2.1 20201203 (x86_64-unknown-linux-gnu)]
   ignore line: [	compiled by GNU C version 10.2.1 20201203  GMP version 6.2.0  MPFR version 4.1.0  MPC version 1.1.0  isl version isl-0.21-GMP]
   ignore line: []
@@ -330,15 +330,15 @@ Parsed CXX implicit link information from above output:
   ignore line: []
   ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
   ignore line: [Compiler executable checksum: 9ae8d70a088aeda1fc99eee36a345833]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_8c72c.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
-  ignore line: [ as -v --64 -o CMakeFiles/cmTC_8c72c.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccsAxm8p.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_eb722.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  ignore line: [ as -v --64 -o CMakeFiles/cmTC_eb722.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccAvr56Y.s]
   ignore line: [GNU assembler version 2.35.1 (x86_64-unknown-linux-gnu) using BFD version (GNU Binutils) 2.35.1]
   ignore line: [COMPILER_PATH=/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/]
   ignore line: [LIBRARY_PATH=/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../:/lib/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_8c72c.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
-  ignore line: [Linking CXX executable cmTC_8c72c]
-  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8c72c.dir/link.txt --verbose=1]
-  ignore line: [/usr/bin/c++  -v CMakeFiles/cmTC_8c72c.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_8c72c ]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_eb722.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  ignore line: [Linking CXX executable cmTC_eb722]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_eb722.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/c++  -v CMakeFiles/cmTC_eb722.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_eb722 ]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=/usr/bin/c++]
   ignore line: [COLLECT_LTO_WRAPPER=/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/lto-wrapper]
@@ -349,13 +349,13 @@ Parsed CXX implicit link information from above output:
   ignore line: [gcc version 10.2.1 20201203 (GCC) ]
   ignore line: [COMPILER_PATH=/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/]
   ignore line: [LIBRARY_PATH=/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../:/lib/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_8c72c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
-  link line: [ /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/collect2 -plugin /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/liblto_plugin.so -plugin-opt=/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccfOJUsT.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_8c72c /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64/Scrt1.o /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64/crti.o /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/crtbeginS.o -L/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1 -L/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../.. CMakeFiles/cmTC_8c72c.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/crtendS.o /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64/crtn.o]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_eb722' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  link line: [ /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/collect2 -plugin /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/liblto_plugin.so -plugin-opt=/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/lto-wrapper -plugin-opt=-fresolution=/tmp/ccsDbhPr.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_eb722 /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64/Scrt1.o /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64/crti.o /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/crtbeginS.o -L/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1 -L/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../.. CMakeFiles/cmTC_eb722.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/crtendS.o /usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64/crtn.o]
     arg [/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/collect2] ==> ignore
     arg [-plugin] ==> ignore
     arg [/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/liblto_plugin.so] ==> ignore
     arg [-plugin-opt=/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/lto-wrapper] ==> ignore
-    arg [-plugin-opt=-fresolution=/tmp/ccfOJUsT.res] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/ccsDbhPr.res] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
     arg [-plugin-opt=-pass-through=-lc] ==> ignore
@@ -370,7 +370,7 @@ Parsed CXX implicit link information from above output:
     arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
     arg [-pie] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTC_8c72c] ==> ignore
+    arg [cmTC_eb722] ==> ignore
     arg [/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64/Scrt1.o] ==> obj [/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64/Scrt1.o]
     arg [/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64/crti.o] ==> obj [/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../../../lib64/crti.o]
     arg [/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/crtbeginS.o] ==> obj [/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/crtbeginS.o]
@@ -379,7 +379,7 @@ Parsed CXX implicit link information from above output:
     arg [-L/lib/../lib64] ==> dir [/lib/../lib64]
     arg [-L/usr/lib/../lib64] ==> dir [/usr/lib/../lib64]
     arg [-L/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../..] ==> dir [/usr/lib64/gcc/x86_64-unknown-linux-gnu/10.2.1/../../..]
-    arg [CMakeFiles/cmTC_8c72c.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [CMakeFiles/cmTC_eb722.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
     arg [-lstdc++] ==> lib [stdc++]
     arg [-lm] ==> lib [m]
     arg [-lgcc_s] ==> lib [gcc_s]
