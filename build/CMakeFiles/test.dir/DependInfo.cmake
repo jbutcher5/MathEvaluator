@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/james/dev/C++/MathEvaluator/include/parser.cpp" "CMakeFiles/test.dir/include/parser.cpp.o" "gcc" "CMakeFiles/test.dir/include/parser.cpp.o.d"
+  "/home/james/dev/C++/MathEvaluator/include/evaluator.cpp" "CMakeFiles/test.dir/include/evaluator.cpp.o" "gcc" "CMakeFiles/test.dir/include/evaluator.cpp.o.d"
   "/home/james/dev/C++/MathEvaluator/test/test.cpp" "CMakeFiles/test.dir/test/test.cpp.o" "gcc" "CMakeFiles/test.dir/test/test.cpp.o.d"
   )
 

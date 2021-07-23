@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 
-#include "../include/parser.hpp"
+#include "../include/evaluator.hpp"
 #include "../include/list.hpp"
 
 #define LOG(x) std::cout << x << std::endl

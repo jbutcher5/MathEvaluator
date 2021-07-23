@@ -83,30 +83,30 @@ CMakeFiles/test.dir/test/test.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test.dir/test/test.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/james/dev/C++/MathEvaluator/test/test.cpp -o CMakeFiles/test.dir/test/test.cpp.s
 
-CMakeFiles/test.dir/include/parser.cpp.o: CMakeFiles/test.dir/flags.make
-CMakeFiles/test.dir/include/parser.cpp.o: ../include/parser.cpp
-CMakeFiles/test.dir/include/parser.cpp.o: CMakeFiles/test.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/james/dev/C++/MathEvaluator/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/test.dir/include/parser.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test.dir/include/parser.cpp.o -MF CMakeFiles/test.dir/include/parser.cpp.o.d -o CMakeFiles/test.dir/include/parser.cpp.o -c /home/james/dev/C++/MathEvaluator/include/parser.cpp
+CMakeFiles/test.dir/include/evaluator.cpp.o: CMakeFiles/test.dir/flags.make
+CMakeFiles/test.dir/include/evaluator.cpp.o: ../include/evaluator.cpp
+CMakeFiles/test.dir/include/evaluator.cpp.o: CMakeFiles/test.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/james/dev/C++/MathEvaluator/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/test.dir/include/evaluator.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test.dir/include/evaluator.cpp.o -MF CMakeFiles/test.dir/include/evaluator.cpp.o.d -o CMakeFiles/test.dir/include/evaluator.cpp.o -c /home/james/dev/C++/MathEvaluator/include/evaluator.cpp
 
-CMakeFiles/test.dir/include/parser.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test.dir/include/parser.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/james/dev/C++/MathEvaluator/include/parser.cpp > CMakeFiles/test.dir/include/parser.cpp.i
+CMakeFiles/test.dir/include/evaluator.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test.dir/include/evaluator.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/james/dev/C++/MathEvaluator/include/evaluator.cpp > CMakeFiles/test.dir/include/evaluator.cpp.i
 
-CMakeFiles/test.dir/include/parser.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test.dir/include/parser.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/james/dev/C++/MathEvaluator/include/parser.cpp -o CMakeFiles/test.dir/include/parser.cpp.s
+CMakeFiles/test.dir/include/evaluator.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test.dir/include/evaluator.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/james/dev/C++/MathEvaluator/include/evaluator.cpp -o CMakeFiles/test.dir/include/evaluator.cpp.s
 
 # Object files for target test
 test_OBJECTS = \
 "CMakeFiles/test.dir/test/test.cpp.o" \
-"CMakeFiles/test.dir/include/parser.cpp.o"
+"CMakeFiles/test.dir/include/evaluator.cpp.o"
 
 # External object files for target test
 test_EXTERNAL_OBJECTS =
 
 test: CMakeFiles/test.dir/test/test.cpp.o
-test: CMakeFiles/test.dir/include/parser.cpp.o
+test: CMakeFiles/test.dir/include/evaluator.cpp.o
 test: CMakeFiles/test.dir/build.make
 test: CMakeFiles/test.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/james/dev/C++/MathEvaluator/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable test"
