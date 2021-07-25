@@ -7,6 +7,9 @@
 #include "list.hpp"
 #include "stack.hpp"
 
+#define PI 3.14159265358979323846
+#define E 2.71828182845904523536
+
 typedef long double ldouble;
 
 inline ldouble _pow(ldouble x, ldouble y, bool aoe) { return (ldouble)pow(x, y); }
@@ -67,8 +70,8 @@ private:
   me_RPN compile(const std::string);
   void populateArrays();
 
-    double pi = (double)M_PI;
-    double e = (double)M_E;
+    double pi = (double)PI;
+    double e = (double)E;
 
   me_RPN rpn;
   std::map<std::string, ldouble (*)(ldouble, ldouble)> multipleParameterFunction;
