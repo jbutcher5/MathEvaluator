@@ -76,7 +76,7 @@ private:
 
   me_RPN rpn;
   std::map<std::string, ldouble (*)(ldouble, ldouble)> multipleParameterFunction;
-  std::map<std::string, double*> externalVariablesMap{{"pi", &pi}, {"e", &e}};
+  std::map<std::string, double*> externalVariablesMap = {{"pi", &pi}, {"e", &e}};
   std::map<std::string, double (*)(double)> functionsMap = {
   {"sin", sin},   {"cos", cos},   {"tan", tan},
   {"asin", asin}, {"acos", acos}, {"atan", atan},
