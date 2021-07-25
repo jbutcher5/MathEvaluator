@@ -1,11 +1,15 @@
 #pragma once
 
 #include <cmath>
+#include <cstddef>
 #include <map>
 #include <string>
 
 #include "list.hpp"
 #include "stack.hpp"
+
+#define PI 3.14159265358979323846
+#define E 2.71828182845904523536
 
 typedef long double ldouble;
 
@@ -42,7 +46,7 @@ public:
 
 template <class T>
 size_t me_List<T>::getIndex(const T data){
-  for (int i = 0; i < this->size(); i++){
+  for (int i = 0; (size_t)i < this->size(); i++){
     if (this->getData(i) == data){
       return i;
     }
@@ -67,8 +71,8 @@ private:
   me_RPN compile(const std::string);
   void populateArrays();
 
-    double pi = (double)M_PI;
-    double e = (double)M_E;
+    double pi = (double)PI;
+    double e = (double)E;
 
   me_RPN rpn;
   std::map<std::string, ldouble (*)(ldouble, ldouble)> multipleParameterFunction;

@@ -47,7 +47,7 @@ void List<T>::append(const T data){
 
 template <class T>
 void List<T>::append(const T* data, const size_t length){	
-  for (int i = 0; i < length; i++) append(*(data + i));
+  for (int i = 0; (size_t)i < length; i++) append(*(data + i));
 }
 
 template <class T>
@@ -153,7 +153,7 @@ void List<T>::freeAll(){
 
 template <class T>
 bool List<T>::inList(const T data){
-  for (int i = 0; i < size(); i++){
+  for (int i = 0; (size_t)i < size(); i++){
     if (getData(i) == data){
       return true;
     }

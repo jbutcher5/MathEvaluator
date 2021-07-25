@@ -1,4 +1,4 @@
-#include "parser.hpp"
+#include "evaluator.hpp"
 
 #include <cmath>
 #include <map>
@@ -6,6 +6,9 @@
 
 #include "list.hpp"
 #include "stack.hpp"
+
+#define PI 3.14159265358979323846
+#define E 2.71828182845904523536
 
 typedef long double ldouble;
 
@@ -17,7 +20,7 @@ ldouble _factorial(ldouble x, ldouble y, bool aoe) {
 
     return factorial;
   }
-  return sqrt(2 * M_PI * y) * pow(y / M_E, y);
+  return sqrt(2 * PI * y) * pow(y / E, y);
 }
 
 MathEvaluator::MathEvaluator(){
