@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cmath>
+#include <cstddef>
 #include <map>
 #include <string>
 
@@ -45,7 +46,7 @@ public:
 
 template <class T>
 size_t me_List<T>::getIndex(const T data){
-  for (int i = 0; i < this->size(); i++){
+  for (int i = 0; (size_t)i < this->size(); i++){
     if (this->getData(i) == data){
       return i;
     }
