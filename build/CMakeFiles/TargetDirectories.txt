@@ -1,3 +1,0 @@
-/home/james/dev/C++/MathEvaluator/build/CMakeFiles/rebuild_cache.dir
-/home/james/dev/C++/MathEvaluator/build/CMakeFiles/edit_cache.dir
-/home/james/dev/C++/MathEvaluator/build/CMakeFiles/test.dir

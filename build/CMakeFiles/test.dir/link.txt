@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/test.dir/test/test.cpp.o CMakeFiles/test.dir/include/evaluator.cpp.o -o test 

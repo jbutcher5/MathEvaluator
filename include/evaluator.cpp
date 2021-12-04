@@ -134,12 +134,12 @@ me_SepValues MathEvaluator::seperate(std::string infix){
       store.append(item); // End head and tail of values are unsynced here
     }
 
-    if (isOperator || isSymbol){
+    else if (isOperator || isSymbol){
 
       bool lastNumOperator = false;
 
       if (values.size() > 0){
-        if (operators.inList(values.getData(values.size()-1))) lastNumOperator = true;
+        if (operators.inList(values[values.size()-1])) lastNumOperator = true;
       }
 
       if ((int)store.size() > 0 && lastNumOperator) lastNumOperator = false;
@@ -155,7 +155,7 @@ me_SepValues MathEvaluator::seperate(std::string infix){
           joiner += j;
         }
         store.freeAll();
-        values.append(joiner);
+        if (joiner != "") values.append(joiner);
         values.append(item);
       }
     }
@@ -209,6 +209,7 @@ me_SepValues MathEvaluator::seperate(std::string infix){
 me_RPN MathEvaluator::compile(const std::string infix){
 
   me_SepValues sep = seperate(infix);
+  isValid(sep);
 
   Stack<Token> stack;
   List<Token> queue;
@@ -289,6 +290,16 @@ me_RPN MathEvaluator::compile(const std::string infix){
   queue.freeAll();
 
   return result;
+}
+
+bool MathEvaluator::isValid(me_SepValues sep){
+  for (size_t i = 0; i < sep.infixValues.size()-1; i++){
+    if (sep.infixValues[i].type == sep.infixValues[i+1].type){
+      throw std::runtime_error(
+        "Invalid math expression between " + sep.infixValues[i].value + "and" + sep.infixValues[i].value
+                               );
+    }
+  }
 }
 
 void MathEvaluator::populateArrays(){
