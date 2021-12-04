@@ -23,6 +23,7 @@ public:
   size_t size();
   Node* getNode(const size_t);
   T getData(const size_t);
+  T operator[](const size_t);
   void remove(const size_t);
   void freeAll();
   bool inList(const T);
@@ -89,6 +90,11 @@ typename List<T>::Node* List<T>::getNode(const size_t index){
 template <class T>
 T List<T>::getData(const size_t index){
   return *(getNode(index)->data);
+}
+
+template <class T>
+T List<T>::operator[](const size_t index){
+  return this->getData(index);
 }
 
 template <class T>
