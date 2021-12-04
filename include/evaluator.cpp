@@ -297,7 +297,7 @@ bool MathEvaluator::isValid(me_SepValues sep){
     if (sep.infixValues[i].type == sep.infixValues[i+1].type){
       throw std::runtime_error(
         "Invalid math expression between " + sep.infixValues[i].value + "and" + sep.infixValues[i].value
-                               );
+      );
     }
   }
 }
