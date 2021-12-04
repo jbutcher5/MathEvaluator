@@ -59,22 +59,25 @@ class MathEvaluator{
 public:
   MathEvaluator();
   MathEvaluator(bool);
+
   void appendVariable(const std::string, double&);
   void deleteVariable(const std::string);
   ldouble eval(const std::string);
+
   me_RPN getRPN() {return rpn;};
   std::map<std::string, double*> getExternalVariables() {return externalVariablesMap;};
 
 private:
+  me_RPN rpn;
+  double pi = (double)PI;
+  double e = (double)E;
 
   me_SepValues seperate(std::string);
   me_RPN compile(const std::string);
+  bool isValid(me_SepValues);
+
   void populateArrays();
 
-    double pi = (double)PI;
-    double e = (double)E;
-
-  me_RPN rpn;
   std::map<std::string, ldouble (*)(ldouble, ldouble)> multipleParameterFunction;
   std::map<std::string, double*> externalVariablesMap = {{"pi", &pi}, {"e", &e}};
   std::map<std::string, double (*)(double)> functionsMap = {
